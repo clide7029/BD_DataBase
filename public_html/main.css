@@ -1,0 +1,41 @@
+html {
+    font-size: 12px; 
+    }
+  
+  :root {
+    --h1-text-size: 30px;
+    --h2-text-size: 25px;
+    --body-text-size: 20px;
+    --primary-font: "Helvetica", sans-serif;
+    --background-color: #0fdbff;
+    --text-color: #191919;
+    }
+  
+  *,
+  *::before,
+  *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    }
+  
+  header {
+      color: var(--text-color);
+      font-size: var(--h1-text-size);
+  }
+
+  body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    font-size: var(--body-text-size);
+    line-height: 1.4;
+    letter-spacing: .1px;
+  }
+
+  .container {
+      column-width: 1000px;
+  }
+
+.logo {
+     width: 250px;
+ }

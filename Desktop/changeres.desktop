@@ -1,0 +1,9 @@
+[Desktop Entry]
+Exec=/usr/local/bin/set-to-1280-960.sh
+Icon=terminal
+Type=Application
+Terminal=false
+Name=ChangeRes (1280x960)
+Categories=Development;X-XFCE;X-Xfce-Toplevel;
+MimeType=
+
