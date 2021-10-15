@@ -1,87 +1,3 @@
-cd /var/log/apache2/
-sudo /var/log/apache2/
-sudo cd /var/log/apache2/
-sudo cd /var/log/apache2/
-sudo cd /var/log/apache2/
-sudo cd /var/log/apache2
-sudo cd /var/log/apache2/
-cd /var/log/apache2/
-ls
-cd ../
-ls
-ls -a
-cd .config
-ls
-cd ../
-cd /etc/apache2/
-ls
-ls -a
-cd /etc/apache2/apache2.conf
-cd /etc/
-ls
-cd logcheck
-ls
-ls -a
-cd ../
-cd rsyslog.conf
-emacs rsyslog.conf
-cd rsyslog.d
-ls
-cd ../
-ls -a
-cd login.defs
-emacs login.defs
-emacs index.html
-apt-get install atom
-sudo apt-get install atom
-sudo apt-get snap install atom
-sudo apt-get update
-apt-get upgrade
-sudo apt-get upgrade
-sudo apt-get install sublime
-sudo apt-get install nano
-ls
-cd public_html
-ls
-nano index.html
-ls
-rmv '#index.html#'
-ls
-ls -a
-touch main.css
-nano main.css
-ls
-cd /var/www/html
-ls
-nano index.html
-ls
-rm index.html
-sudo rm index.html
-ls
-ls
-touch index.html
-ls
-sudo touch index.html
-ls
-nano index.html
-sudo nano index.html
-sudo touch main.css
-sudo nano main.css
-sudo nano index.html
-sudo nano index.html
-sudo nano index.html
-sudo nano main.css
-sudo apt-get install atom
-sudo apt-get install sublime
-sudo snap install atom
-sudo snap install atom --classic
-atom index.html
-atom
-sudo apt install software-properties-common apt-transport-https wget
-wget -q https://packagecloud.io/AtomEditor/atom/gpgkey -O- | sudo apt-key add -
-sudo add-apt-repository "deb [arch=amd64] https://packagecloud.io/AtomEditor/atom/any/ any main"
-sudo apt install atom
-atom index.html
 ls
 atom
 sudo atom
@@ -497,4 +413,88 @@ cd myDB/
 ls
 ps aux
 sudo apachectl -D DUMP_RUN_CFG
+exit
+php -m
+php -i
+cd
+ls
+ps aux
+cd public_html
+ls
+cd myDB
+ls
+chmod 777 
+chmod --help
+chmod 777 showPassengers.php
+ls
+ls
+cd
+phpinfo() l
+php -m
+php PDO
+php pdo_mysql
+php -i
+cd
+ls -al
+rm .git
+rm -r .git
+ls -al
+rm -rf .git
+ls -al
+rm -rf .gitconfig
+ls -al
+ls -al
+cd BD_DataBase
+ls
+ls -al
+show README.md
+mv BD_DataBase ..
+mkdir .git
+ls -al
+cd
+mv BD_DataBase ..
+sudo mv BD_Database ..
+ls -al
+sudo mv BD_DataBase ..
+ls -al
+cd ..
+ls -al
+cd BD_DataBase
+mv .git ..
+cd
+cd ..
+ls
+cd dbtema
+cd dbteam
+ls
+cd
+cd ..
+mv BD_DataBase dbteam
+sudo mv BD_DataBase dbteam
+cd
+ls
+ls -al
+ls
+README.md
+cd
+cd public_html
+ls
+rm showPassengers.php
+cd myDB
+ls
+cd ..
+php -,
+-F showPassengers.php
+-f showPassengers.php
+ls
+ls
+cd myDB
+php
+-v
+php -v
+php -f showPassengers.php
+mv showPassengers.php ..
+cd ..
+ls
+exit
 exit
