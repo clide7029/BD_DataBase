@@ -48,7 +48,7 @@ if($errorstring != ""){
     //exit("");
 
 }
-//exit("");
+exit("");
 echo "im fucking done";
 
  $db_file = './myDB/airport.db';
