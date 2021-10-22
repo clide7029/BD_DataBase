@@ -6,22 +6,22 @@ $last = $_POST['last'];
 $ssn = $_POST['ssn'];
  $errorstring = "";
 
- if($first = ""){
+ if($first == ""){
      $errorstring .= "First_Empty ";
  }
- if($last = ""){
+ if($last == ""){
      $errorstring .= "Last_Empty ";
  }
- if($ssn = ""){
+ if($ssn == ""){
      $errorstring .= "SSN_Empty ";
  }
- if($first = NULL){
+ if($first == NULL){
      $errorstring .= "First_Null ";
  }
- if($last = NULL){
+ if($last == NULL){
      $errorstring .= "Last_Null ";
  }
- if($ssn = NULL){
+ if($ssn == NULL){
      $errorstring .= "SSN_Null ";
  }
  echo $errorstring;
