@@ -53,7 +53,7 @@ echo "im fucking done";
      $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 //     //return all passengers, and store the result set
-     $stmt = $db -> prepare("insert into passengers (first, middle, last, ssn) values (:first, :middle, :last, :ssn);");  // <----- Line 19
+     $stmt = $db -> prepare("insert into passengers (f_name, m_name, l_name, ssn) values (:first, :middle, :last, :ssn);");  // <----- Line 19
      $stmt->bindParam(':first', $first);
      $stmt->bindParam(':middle', $middle);
      $stmt->bindParam(':last', $last);
