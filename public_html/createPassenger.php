@@ -58,7 +58,7 @@ echo "im fucking done";
 
     echo "success";
       $_SESSION['successinsert'] = true;
-      header('Location: ./showPassenger.php');
+      header('Location: ./showPassengers.php');
  }
  catch(PDOException $e) {
      die('Exception : '.$e->getMessage());
