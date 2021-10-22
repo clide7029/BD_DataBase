@@ -70,3 +70,4 @@ try {
 catch(PDOException $e) {
     die('Exception : '.$e->getMessage());
 }
+?>
