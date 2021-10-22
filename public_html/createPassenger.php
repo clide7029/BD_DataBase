@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 $first = $_POST['first'];
 $middle = $_POST['middle'];
 $last = $_POST['last'];
@@ -62,7 +62,8 @@ try {
     $stmt->bindParam(':last', $last);
     $stmt->bindParam(':ssn', $ssn);
     execute($stmt);
-
+    $_SESSION['successinsert'] = true;
+    header('Location: ./showPassenger.php');
 }
 catch(PDOException $e) {
     die('Exception : '.$e->getMessage());

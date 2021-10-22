@@ -25,6 +25,11 @@
                 echo "<font color='blue'>$tuple[ssn]</font> $tuple[f_name] $tuple[m_name] $tuple[l_name]<br/>\n";
             }
             echo "Team: Skyler Connor Andrew Brian";
+            session_start();
+            if($_SESSION['successinsert'] = true){
+                echo "successfully inserted";
+            }
+
 
             //disconnect from db
             $db = null;
