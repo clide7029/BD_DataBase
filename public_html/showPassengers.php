@@ -30,6 +30,10 @@
                 echo "successfully inserted";
                 $_SESSION['successinsert'] = false;
             }
+            if($_SESSION['successupdate']){
+                echo "successfully updated";
+                $_SESSION['successupdate'] = false;
+            }
 
 
             //disconnect from db

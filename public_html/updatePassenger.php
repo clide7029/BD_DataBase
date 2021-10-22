@@ -77,7 +77,7 @@ $db_file = './myDB/airport.db';
         echo "update last";
     }
     echo "success";
-    $_SESSION['successinsert'] = true;
+    $_SESSION['successupdate'] = true;
     header('Location: ./showPassengers.php');
  }
  catch(PDOException $e) {
