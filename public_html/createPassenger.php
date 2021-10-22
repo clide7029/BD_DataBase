@@ -4,34 +4,35 @@ $first = $_POST['first'];
 $middle = $_POST['middle'];
 $last = $_POST['last'];
 $ssn = $_POST['ssn'];
-
+error_log(
+    "variables loaded", 0
+)
 $errorstring = "";
 
 if($first = ""){
-    $errorstring .= "First_Empty ",
-}
+    $errorstring .= "First_Empty ";
 }
 if($last = ""){
-    $errorstring .= "Last_Empty ",
+    $errorstring .= "Last_Empty ";
 }
 if($ssn = ""){
-    $errorstring .= "SSN_Empty ",
+    $errorstring .= "SSN_Empty ";
 }
 if($first = NULL){
-    $errorstring .= "First_Null ",
+    $errorstring .= "First_Null ";
 }
 }
 if($last = NULL){
-    $errorstring .= "Last_Null ",
+    $errorstring .= "Last_Null ";
 }
 if($ssn = NULL){
-    $errorstring .= "SSN_Null ",
+    $errorstring .= "SSN_Null ";
 }
 if(!ctype_alpha(first)){
-    $errorstring .= "First_Non-Alphabetical ",
+    $errorstring .= "First_Non-Alphabetical ";
 }
 if(!ctype_alpha(last)){
-    $errorstring .= "Last_Non-Alphabetical ",
+    $errorstring .= "Last_Non-Alphabetical ";
 }
 if(strlen($ssn)!=11){
     $errorstring .= "SSN_Wrong_Length";
@@ -43,7 +44,8 @@ if(!is_numeric($tempSSN)){
 }
 
 if($errorstring != ""){
-    echo $_GET['$errorstring']; //make this send to skyler
+    echo "<script>alert('<php echo $errorstring; ?>')</script>"; //make this send to skyler
+    header(./inputForm.html);
 }
 
 $db_file = './myDB/airport.db';
