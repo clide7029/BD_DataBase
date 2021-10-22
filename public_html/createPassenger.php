@@ -42,13 +42,16 @@ $ssn = $_POST['ssn'];
  }
 echo $errorstring;
 if($errorstring != ""){
-    header('Location: ./inputForm.html');
-    echo '<script>alert("there was an error");</script>'; //make this send to skyler
+    //header('Location: ./inputForm.html');
+    echo '<script>alert("there was an error");
+        window.location.href = "./inputForm.php";
+    </script>'; //make this send to skyler
     //echo '<script type="text/JavaScript"> prompt("GeeksForGeeks");</script>';
     //exit("");
+    exit("");
 
 }
-exit("");
+
 echo "im fucking done";
 
  $db_file = './myDB/airport.db';
