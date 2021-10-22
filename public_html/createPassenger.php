@@ -60,7 +60,7 @@ echo "fuck you!!!"
     //  $stmt->bindParam(':ssn', $ssn);
     $query_str = "insert into passengers" first middle last ssn ";";  // <----- Line 19
     $result_set = $db->query($query_str);
-    execute($stmt);
+    //execute($stmt);
     echo "success";
      //$_SESSION['successinsert'] = true;
      //header('Location: ./showPassenger.php');
