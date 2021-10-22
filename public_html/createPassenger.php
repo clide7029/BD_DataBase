@@ -59,7 +59,7 @@ echo "im fucking done";
     //  $stmt->bindParam(':last', $last);
     //  $stmt->bindParam(':ssn', $ssn);
     //  execute($stmt);
-    $query_str = "insert into passengers" "'" first "', '" middle "', '" last "', '" ssn "'"  ";";  // <----- Line 19
+    $query_str = "insert into passengers values (" "'" first "', '" middle "', '" last "', '" ssn "'"  ");";  // <----- Line 19
     $result_set = $db->query($query_str);
     echo "success";
     //  $_SESSION['successinsert'] = true;
