@@ -1,6 +1,7 @@
 <?php
 $ssn = $_POST['ssn'];
 $attribute = $_POST['attribute'];
+$value = $_POST['value'];
 $first ="";
 $middle = "";
 $last = "";
@@ -61,21 +62,10 @@ $db_file = './myDB/airport.db';
      $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     //return all passengers, and store the result set
-    if($attribute == "first"){
-     $stmt = $db -> prepare("update passengers set f_name = ? where ssn = ?;");  // <----- Line 19
-     $stmt-> execute([$_POST['first'],$_POST['ssn']);
-     echo "update first";
-    }
-    if($attribute == "middle"){
-        //$stmt = $db -> prepare("update passengers set m_name = (?);");  // <----- Line 19
-        //$stmt-> execute([$_POST['middle']);
-        echo "update middle";
-       }
-    if($attribute == "last"){
-        //$stmt = $db -> prepare("update passengers set l_name = (?);");  // <----- Line 19
-        //$stmt-> execute([$_POST['last']);
-        echo "update last";
-    }
+    $stmt = $db -> prepare("update passengers set (:attribute) = (:value) where ssn = (:ssn);");
+    $stmt -> bindParam(':attribute',$attribute);
+    $stmt -> bindParam(':value',$value);
+    $stmt -> bindParam(':ssn', $ssn);
     echo "success";
     $_SESSION['successupdate'] = true;
     header('Location: ./showPassengers.php');
