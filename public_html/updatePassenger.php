@@ -62,8 +62,8 @@ $db_file = './myDB/airport.db';
      $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     //return all passengers, and store the result set
-    $stmt = $db -> prepare("update passengers set ? = ? where ssn = ?;");
-    $stmt -> bindParam($attribute, $value, $ssn);
+    $stmt = $db -> prepare("update passengers set ?=? where ssn =?;");
+    $stmt -> bindParam('sss',$attribute, $value, $ssn);
     $stmt -> execute();
     echo "success";
     $_SESSION['successupdate'] = true;
