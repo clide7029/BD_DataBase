@@ -53,15 +53,17 @@ echo $errorstring;
      $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 //     //return all passengers, and store the result set
-     $stmt = $db -> prepare("insert into passengers (f_name, m_name, l_name, ssn) values (:f_name, :m_name, :l_name, :ssn);");  // <----- Line 19
-     $stmt->bindParam(':f_name', $first);
-     $stmt->bindParam(':m_name', $middle);
-     $stmt->bindParam(':l_name', $last);
-     $stmt->bindParam(':ssn', $ssn);
-     execute($stmt);
-     echo "success";
-     $_SESSION['successinsert'] = true;
-     header('Location: ./showPassenger.php');
+    //  $stmt = $db -> prepare("insert into passengers (f_name, m_name, l_name, ssn) values (:f_name, :m_name, :l_name, :ssn);");  // <----- Line 19
+    //  $stmt->bindParam(':f_name', $first);
+    //  $stmt->bindParam(':m_name', $middle);
+    //  $stmt->bindParam(':l_name', $last);
+    //  $stmt->bindParam(':ssn', $ssn);
+    $query_str = "insert into passengers" first middle last ssn ";";  // <----- Line 19
+    $result_set = $db->query($query_str);
+    execute($stmt);
+    echo "success";
+     //$_SESSION['successinsert'] = true;
+     //header('Location: ./showPassenger.php');
  }
  catch(PDOException $e) {
      die('Exception : '.$e->getMessage());
