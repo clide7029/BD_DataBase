@@ -64,17 +64,17 @@ $db_file = './myDB/airport.db';
     if($attribute == "first"){
      //$stmt = $db -> prepare("update passengers set f_name = (?);");  // <----- Line 19
      //$stmt-> execute([$_POST['first']);
-     echo "update first"
+     echo "update first";
     }
     if($attribute == "middle"){
         //$stmt = $db -> prepare("update passengers set m_name = (?);");  // <----- Line 19
         //$stmt-> execute([$_POST['middle']);
-        echo "update middle"
+        echo "update middle";
        }
     if($attribute == "last"){
         //$stmt = $db -> prepare("update passengers set l_name = (?);");  // <----- Line 19
         //$stmt-> execute([$_POST['last']);
-        echo "update last"
+        echo "update last";
     }
     echo "success";
     //  $_SESSION['successinsert'] = true;
