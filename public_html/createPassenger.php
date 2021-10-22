@@ -34,13 +34,13 @@ $ssn = $_POST['ssn'];
  if(strlen($ssn)!=11){
      $errorstring .= "SSN_Wrong_Length";
  }
- echo $errorstring;
-// $tempSSN = explode("-",$ssn);
-// $tempSSN = implode("", $tempSSN);
-// if(!is_numeric($tempSSN)){
-//     $errorstring .= "SSN_Not_Numeric ";
-// }
 
+ $tempSSN = explode("-",$ssn);
+ $tempSSN = implode("", $tempSSN);
+ if(!is_numeric($tempSSN)){
+     $errorstring .= "SSN_Not_Numeric ";
+ }
+echo $errorstring;
 
 
 // $db_file = './myDB/airport.db';
