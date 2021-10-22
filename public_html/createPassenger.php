@@ -60,8 +60,8 @@ echo "im fucking done";
      $stmt->bindParam(':ssn', $ssn);
      execute($stmt);
      echo "success";
-     $_SESSION['successinsert'] = true;
-     header('Location: ./showPassenger.php');
+    //  $_SESSION['successinsert'] = true;
+    //  header('Location: ./showPassenger.php');
  }
  catch(PDOException $e) {
      die('Exception : '.$e->getMessage());
