@@ -25,10 +25,10 @@ $ssn = $_POST['ssn'];
      $errorstring .= "SSN_Null ";
  }
 
- if(!ctype_alpha(first)){
+ if(!ctype_alpha($first)){
      $errorstring .= "First_Non-Alphabetical ";
  }
- if(!ctype_alpha(last)){
+ if(!ctype_alpha($last)){
      $errorstring .= "Last_Non-Alphabetical ";
  }
  if(strlen($ssn)!=11){
