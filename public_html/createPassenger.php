@@ -44,6 +44,7 @@ echo $errorstring;
 if($errorstring != ""){
     echo "<script>alert('there was an error')</script>"; //make this send to skyler
     header('Location: ./inputForm.html');
+    exit("");
 }
 echo "im fucking done";
 
