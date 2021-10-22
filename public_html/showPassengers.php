@@ -28,7 +28,7 @@
             session_start();
             if($_SESSION['successinsert']){
                 echo "successfully inserted";
-                $_SESSION['successinsert'] = false
+                $_SESSION['successinsert'] = false;
             }
 
 
