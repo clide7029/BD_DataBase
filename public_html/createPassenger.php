@@ -61,8 +61,8 @@ echo "im fucking done";
      $stmt-> execute([$_POST['first'],$_POST['middle'],$_POST['last'],$_POST['ssn']]);
 
     echo "success";
-      $_SESSION['successinsert'] = true;
-      header('Location: ./showPassengers.php');
+ //     $_SESSION['successinsert'] = true;
+ //     header('Location: ./showPassengers.php');
  }
  catch(PDOException $e) {
      die('Exception : '.$e->getMessage());
