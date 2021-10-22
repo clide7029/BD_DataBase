@@ -41,7 +41,7 @@ $ssn = $_POST['ssn'];
      $errorstring .= "SSN_Not_Numeric ";
  }
 echo $errorstring;
-echo "im smart"
+echo "im fucking done";
 
  $db_file = './myDB/airport.db';
  try {
