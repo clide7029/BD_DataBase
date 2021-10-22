@@ -42,7 +42,7 @@ $ssn = $_POST['ssn'];
  }
 echo $errorstring;
 if($errorstring != ""){
-    echo "<script>alert('there was an error')</script>"; //make this send to skyler
+    echo "<script>alert('there was an error');</script>"; //make this send to skyler
     header('Location: ./inputForm.html');
     exit("");
 }
@@ -62,8 +62,8 @@ echo "im fucking done";
      $stmt-> execute([$_POST['first'],$_POST['middle'],$_POST['last'],$_POST['ssn']]);
 
     echo "success";
- //     $_SESSION['successinsert'] = true;
- //     header('Location: ./showPassengers.php');
+      $_SESSION['successinsert'] = true;
+      header('Location: ./showPassengers.php');
  }
  catch(PDOException $e) {
      die('Exception : '.$e->getMessage());
