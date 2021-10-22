@@ -62,8 +62,8 @@ $db_file = './myDB/airport.db';
 
     //return all passengers, and store the result set
     if($attribute == "first"){
-     //$stmt = $db -> prepare("update passengers set f_name = (?);");  // <----- Line 19
-     //$stmt-> execute([$_POST['first']);
+     $stmt = $db -> prepare("update passengers set f_name = (?) where ssn = ?;");  // <----- Line 19
+     $stmt-> execute([$_POST['first',$_POST['ssn']]);
      echo "update first";
     }
     if($attribute == "middle"){
