@@ -41,7 +41,7 @@ $ssn = $_POST['ssn'];
      $errorstring .= "SSN_Not_Numeric ";
  }
 echo $errorstring;
-
+echo "im smart"
 
  $db_file = './myDB/airport.db';
  try {
@@ -54,10 +54,10 @@ echo $errorstring;
 
 //     //return all passengers, and store the result set
      $stmt = $db -> prepare("insert into passengers (first, middle, last, ssn) values (:first, :middle, :last, :ssn);");  // <----- Line 19
-     $stmt->bindParam(':first', $first);
-     $stmt->bindParam(':middle', $middle);
-     $stmt->bindParam(':last', $last);
-     $stmt->bindParam(':ssn', $ssn);
+     $stmt->bindParam(':first', "\""$first"\"");
+     $stmt->bindParam(':middle', "\""$middle"\"");
+     $stmt->bindParam(':last', "\""$last"\"");
+     $stmt->bindParam(':ssn', "\""$ssn"\"");
      execute($stmt);
      echo "success";
      $_SESSION['successinsert'] = true;
