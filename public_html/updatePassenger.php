@@ -51,33 +51,33 @@ if($errorstring != ""){
     exit("");
 
 }
-$db_file = './myDB/airport.db';
- try {
+// $db_file = './myDB/airport.db';
+//  try {
 
-//     //open connection to the airport database file
-     $db = new PDO('sqlite:' . $db_file);      // <------ Line 13
+// //     //open connection to the airport database file
+//      $db = new PDO('sqlite:' . $db_file);      // <------ Line 13
 
-//     //set errormode to use exceptions
-     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+// //     //set errormode to use exceptions
+//      $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    //return all passengers, and store the result set
-    if($attribute == "first"){
-     $stmt = $db -> prepare("update passengers set f_name = (?);");  // <----- Line 19
-     $stmt-> execute([$_POST['first']);
-    }
-    if($attribute == "middle"){
-        $stmt = $db -> prepare("update passengers set m_name = (?);");  // <----- Line 19
-        $stmt-> execute([$_POST['middle']);
-       }
-    if($attribute == "last"){
-        $stmt = $db -> prepare("update passengers set l_name = (?);");  // <----- Line 19
-        $stmt-> execute([$_POST['last']);
-    }
-    echo "success";
-      $_SESSION['successinsert'] = true;
-      header('Location: ./showPassengers.php');
- }
- catch(PDOException $e) {
-     die('Exception : '.$e->getMessage());
- }
-?>
+//     //return all passengers, and store the result set
+//     if($attribute == "first"){
+//      $stmt = $db -> prepare("update passengers set f_name = (?);");  // <----- Line 19
+//      $stmt-> execute([$_POST['first']);
+//     }
+//     if($attribute == "middle"){
+//         $stmt = $db -> prepare("update passengers set m_name = (?);");  // <----- Line 19
+//         $stmt-> execute([$_POST['middle']);
+//        }
+//     if($attribute == "last"){
+//         $stmt = $db -> prepare("update passengers set l_name = (?);");  // <----- Line 19
+//         $stmt-> execute([$_POST['last']);
+//     }
+//     echo "success";
+//       $_SESSION['successinsert'] = true;
+//       header('Location: ./showPassengers.php');
+//  }
+//  catch(PDOException $e) {
+//      die('Exception : '.$e->getMessage());
+//  }
+// ?>
