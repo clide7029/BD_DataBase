@@ -24,16 +24,17 @@ $ssn = $_POST['ssn'];
  if($ssn == NULL){
      $errorstring .= "SSN_Null ";
  }
+
+ if(!ctype_alpha(first)){
+     $errorstring .= "First_Non-Alphabetical ";
+ }
+ if(!ctype_alpha(last)){
+     $errorstring .= "Last_Non-Alphabetical ";
+ }
+ if(strlen($ssn)!=11){
+     $errorstring .= "SSN_Wrong_Length";
+ }
  echo $errorstring;
-// if(!ctype_alpha(first)){
-//     $errorstring .= "First_Non-Alphabetical ";
-// }
-// if(!ctype_alpha(last)){
-//     $errorstring .= "Last_Non-Alphabetical ";
-// }
-// if(strlen($ssn)!=11){
-//     $errorstring .= "SSN_Wrong_Length";
-// }
 // $tempSSN = explode("-",$ssn);
 // $tempSSN = implode("", $tempSSN);
 // if(!is_numeric($tempSSN)){
