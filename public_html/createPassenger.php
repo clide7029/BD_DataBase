@@ -53,9 +53,8 @@ echo "im fucking done";
      $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     //return all passengers, and store the result set
-    //  $stmt = $db -> prepare("insert into passengers values (?, ?, ?, ?);");  // <----- Line 19
-
-    //  $stmt-> execute([$first,$middle,$last,$ssn]);
+     $stmt = $db -> prepare("insert into passengers values (?, ?, ?, ?);");  // <----- Line 19
+     $stmt-> execute([$_POST['first'],$_POST['middle'],$_POST['last'],$_POST['ssn']]);
 
     echo "success";
     //  $_SESSION['successinsert'] = true;
