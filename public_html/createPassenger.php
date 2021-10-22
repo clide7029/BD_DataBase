@@ -53,10 +53,10 @@ echo $errorstring;
      $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 //     //return all passengers, and store the result set
-     $stmt = $db -> prepare("insert into passengers (f_name, m_name, l_name, ssn) values (:first, :middle, :last, :ssn);");  // <----- Line 19
-     $stmt->bindParam(':first', $first);
-     $stmt->bindParam(':middle', $middle);
-     $stmt->bindParam(':last', $last);
+     $stmt = $db -> prepare("insert into passengers (f_name, m_name, l_name, ssn) values (:f_name, :m_name, :l_name, :ssn);");  // <----- Line 19
+     $stmt->bindParam(':f_name', $first);
+     $stmt->bindParam(':m_name', $middle);
+     $stmt->bindParam(':l_name', $last);
      $stmt->bindParam(':ssn', $ssn);
      execute($stmt);
      echo "success";
