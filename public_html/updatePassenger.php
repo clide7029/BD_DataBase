@@ -62,7 +62,7 @@ $db_file = './myDB/airport.db';
      $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     //return all passengers, and store the result set
-    $attribute = "f_name";
+    $attribute = 'f_name';
     $stmt = $db -> prepare("update passengers set (:attribute) = (:value) where ssn = (:ssn);");
     $stmt -> bindParam(':attribute',$attribute);
     $stmt -> bindParam(':value',$_POST['value']);
