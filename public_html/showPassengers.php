@@ -26,7 +26,7 @@
             }
             echo "Team: Skyler Connor Andrew Brian";
             session_start();
-            if($_SESSION['successinsert'] = true){
+            if($_SESSION['successinsert']){
                 echo "successfully inserted";
             }
 
