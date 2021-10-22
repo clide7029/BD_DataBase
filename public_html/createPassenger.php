@@ -44,7 +44,7 @@ echo $errorstring;
 if($errorstring != ""){
     //header('Location: ./inputForm.html');
     echo '<script>alert("there was an error");
-        window.location.href = "./inputForm.php";
+        window.location.href = "./inputForm.html";
     </script>'; //make this send to skyler
     //echo '<script type="text/JavaScript"> prompt("GeeksForGeeks");</script>';
     //exit("");
