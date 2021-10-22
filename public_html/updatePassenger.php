@@ -63,9 +63,9 @@ $db_file = './myDB/airport.db';
 
     //return all passengers, and store the result set
     $stmt = $db -> prepare("update passengers set (:attribute) = (:value) where ssn = (:ssn);");
-    $stmt -> bindParam(':attribute',$attribute);
-    $stmt -> bindParam(':value',$value);
-    $stmt -> bindParam(':ssn', $ssn);
+    $stmt -> bindParam('attribute',$attribute);
+    $stmt -> bindParam('value',$value);
+    $stmt -> bindParam('ssn', $ssn);
     echo "success";
     $_SESSION['successupdate'] = true;
     header('Location: ./showPassengers.php');
