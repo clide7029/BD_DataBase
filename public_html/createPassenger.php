@@ -42,7 +42,7 @@ $ssn = $_POST['ssn'];
  }
 echo $errorstring;
 if($errorstring != ""){
-    echo "<script>alert('there was an error');</script>"; //make this send to skyler
+    echo '<script>alert("there was an error");</script>'; //make this send to skyler
     header('Location: ./inputForm.html');
     exit("");
 }
