@@ -66,6 +66,7 @@ $db_file = './myDB/airport.db';
     // $stmt -> bindParam(':attribute',$_POST['attribute']);
     $stmt -> bindParam(':value',$_POST['value']);
     $stmt -> bindParam(':ssn', $_POST['ssn']);
+    $stmt -> execute();
     echo "success";
     $_SESSION['successupdate'] = true;
     header('Location: ./showPassengers.php');
