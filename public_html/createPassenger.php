@@ -53,11 +53,11 @@ echo "im smart"
      $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 //     //return all passengers, and store the result set
-     $stmt = $db -> prepare("INSERT INTO Passengers (f_name, m_name, l_name, ssn) VALUES (:first, :middle, :last, :ssn);");  // <----- Line 19
-     $stmt->bindParam(':first', "\""$first"\"");
-     $stmt->bindParam(':middle', "\""$middle"\"");
-     $stmt->bindParam(':last', "\""$last"\"");
-     $stmt->bindParam(':ssn', "\""$ssn"\"");
+     $stmt = $db -> prepare("insert into passengers (first, middle, last, ssn) values (:first, :middle, :last, :ssn);");  // <----- Line 19
+     $stmt->bindParam(':first', $first);
+     $stmt->bindParam(':middle', $middle);
+     $stmt->bindParam(':last', $last);
+     $stmt->bindParam(':ssn', $ssn);
      execute($stmt);
      echo "success";
      $_SESSION['successinsert'] = true;
