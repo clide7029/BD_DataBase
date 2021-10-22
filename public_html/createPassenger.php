@@ -43,26 +43,27 @@ $ssn = $_POST['ssn'];
 echo $errorstring;
 
 
-// $db_file = './myDB/airport.db';
-// try {
+ $db_file = './myDB/airport.db';
+ try {
 
 //     //open connection to the airport database file
-//     $db = new PDO('sqlite:' . $db_file);      // <------ Line 13
+     $db = new PDO('sqlite:' . $db_file);      // <------ Line 13
 
 //     //set errormode to use exceptions
-//     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 //     //return all passengers, and store the result set
-//     $stmt = $db -> prepare("insert into passengers (first, middle, last, ssn) values (:first, :middle, :last, :ssn);");  // <----- Line 19
-//     $stmt->bindParam(':first', $first);
-//     $stmt->bindParam(':middle', $middle);
-//     $stmt->bindParam(':last', $last);
-//     $stmt->bindParam(':ssn', $ssn);
-//     execute($stmt);
-//     $_SESSION['successinsert'] = true;
-//     header('Location: ./showPassenger.php');
-// }
-// catch(PDOException $e) {
-//     die('Exception : '.$e->getMessage());
-// }
+     $stmt = $db -> prepare("insert into passengers (first, middle, last, ssn) values (:first, :middle, :last, :ssn);");  // <----- Line 19
+     $stmt->bindParam(':first', $first);
+     $stmt->bindParam(':middle', $middle);
+     $stmt->bindParam(':last', $last);
+     $stmt->bindParam(':ssn', $ssn);
+     execute($stmt);
+     echo "success";
+     $_SESSION['successinsert'] = true;
+     header('Location: ./showPassenger.php');
+ }
+ catch(PDOException $e) {
+     die('Exception : '.$e->getMessage());
+ }
 ?>
