@@ -32,7 +32,7 @@ $ssn = $_POST['ssn'];
      $errorstring .= "Last_Non-Alphabetical ";
  }
  if(strlen($ssn)!=11){
-     $errorstring .= "SSN_Wrong_Length";
+     $errorstring .= "SSN_Wrong_Length ";
  }
 
  $tempSSN = explode("-",$ssn);
