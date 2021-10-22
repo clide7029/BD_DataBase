@@ -41,6 +41,10 @@ $ssn = $_POST['ssn'];
      $errorstring .= "SSN_Not_Numeric ";
  }
 echo $errorstring;
+if($errorstring != ""){
+    echo "<script>alert('there was an error')</script>"; //make this send to skyler
+    header('Location: ./inputForm.html');
+}
 echo "im fucking done";
 
  $db_file = './myDB/airport.db';
