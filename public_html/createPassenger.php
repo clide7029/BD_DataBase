@@ -7,32 +7,32 @@ $ssn = $_POST['ssn'];
  $errorstring = "";
 
  if($first == ""){
-     $errorstring .= "First_Empty ";
+     $errorstring .= "First_Empty\n";
  }
  if($last == ""){
-     $errorstring .= "Last_Empty ";
+     $errorstring .= "Last_Empty\n";
  }
  if($ssn == ""){
-     $errorstring .= "SSN_Empty ";
+     $errorstring .= "SSN_Empty\n";
  }
  if($first == NULL){
-     $errorstring .= "First_Null ";
+     $errorstring .= "First_Null\n";
  }
  if($last == NULL){
-     $errorstring .= "Last_Null ";
+     $errorstring .= "Last_Null\n";
  }
  if($ssn == NULL){
-     $errorstring .= "SSN_Null ";
+     $errorstring .= "SSN_Null\n";
  }
 
  if(!ctype_alpha($first)){
-     $errorstring .= "First_Non-Alphabetical ";
+     $errorstring .= "First_Non-Alphabetical\n";
  }
  if(!ctype_alpha($last)){
-     $errorstring .= "Last_Non-Alphabetical ";
+     $errorstring .= "Last_Non-Alphabetical\n";
  }
  if(strlen($ssn)!=11){
-     $errorstring .= "SSN_Wrong_Length";
+     $errorstring .= "SSN_Wrong_Length\n";
  }
 
  $tempSSN = explode("-",$ssn);
@@ -43,7 +43,7 @@ $ssn = $_POST['ssn'];
 echo $errorstring;
 if($errorstring != ""){
     //header('Location: ./inputForm.html');
-    echo "<script>alert('INVALID FIELDS'.concat('$errorstring'));
+    echo "<script>alert('INVALID FIELDS: '.concat('$errorstring'));
         window.location.href = './inputForm.html';
     </script>"; //make this send to skyler
     //echo '<script type="text/JavaScript"> prompt("GeeksForGeeks");</script>';
