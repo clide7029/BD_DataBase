@@ -43,9 +43,9 @@ $ssn = $_POST['ssn'];
 echo $errorstring;
 if($errorstring != ""){
     //header('Location: ./inputForm.html');
-    echo '<script> var = "<?php echo json_encode($errorstring); ?>";alert("INVALID FIELDS" + var);
-        window.location.href = "./inputForm.html";
-    </script>'; //make this send to skyler
+    echo "<script> var = '<?php echo json_encode($errorstring); ?>';alert('INVALID FIELDS'.concat(var));
+        window.location.href = './inputForm.html';
+    </script>"; //make this send to skyler
     //echo '<script type="text/JavaScript"> prompt("GeeksForGeeks");</script>';
     //exit("");
     exit("");
