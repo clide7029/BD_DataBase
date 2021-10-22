@@ -7,7 +7,7 @@ $ssn = $_POST['ssn'];
  $errorstring = "";
 
  if($first == ""){
-     $errorstring .= "First_Empty ";
+     $errorstring .= "First_Empty \n";
  }
  if($last == ""){
      $errorstring .= "Last_Empty ";
