@@ -52,15 +52,11 @@ echo "im fucking done";
 //     //set errormode to use exceptions
      $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-//     //return all passengers, and store the result set
-    //  $stmt = $db -> prepare("insert into passengers (f_name, m_name, l_name, ssn) values (:first, :middle, :last, :ssn);");  // <----- Line 19
-    //  $stmt->bindParam(':first', $first);
-    //  $stmt->bindParam(':middle', $middle);
-    //  $stmt->bindParam(':last', $last);
-    //  $stmt->bindParam(':ssn', $ssn);
-    //  execute($stmt);
-    $query_str = "insert into passengers values (" "'" first "', '" middle "', '" last "', '" ssn "'"  ");";  // <----- Line 19
-    $result_set = $db->query($query_str);
+    //return all passengers, and store the result set
+     $stmt = $db -> prepare("insert into passengers values (?, ?, ?, ?);");  // <----- Line 19
+
+     $stmt-> execute([$first,$middle,$last,$ssn]);
+
     echo "success";
     //  $_SESSION['successinsert'] = true;
     //  header('Location: ./showPassenger.php');
