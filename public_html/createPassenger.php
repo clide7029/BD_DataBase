@@ -4,27 +4,27 @@ $first = $_POST['first'];
 $middle = $_POST['middle'];
 $last = $_POST['last'];
 $ssn = $_POST['ssn'];
-// error_log("variables loaded", 0);
-// $errorstring = "";
+ $errorstring = "";
 
-// if($first = ""){
-//     $errorstring .= "First_Empty ";
-// }
-// if($last = ""){
-//     $errorstring .= "Last_Empty ";
-// }
-// if($ssn = ""){
-//     $errorstring .= "SSN_Empty ";
-// }
-// if($first = NULL){
-//     $errorstring .= "First_Null ";
-// }
-// if($last = NULL){
-//     $errorstring .= "Last_Null ";
-// }
-// if($ssn = NULL){
-//     $errorstring .= "SSN_Null ";
-// }
+ if($first = ""){
+     $errorstring .= "First_Empty ";
+ }
+ if($last = ""){
+     $errorstring .= "Last_Empty ";
+ }
+ if($ssn = ""){
+     $errorstring .= "SSN_Empty ";
+ }
+ if($first = NULL){
+     $errorstring .= "First_Null ";
+ }
+ if($last = NULL){
+     $errorstring .= "Last_Null ";
+ }
+ if($ssn = NULL){
+     $errorstring .= "SSN_Null ";
+ }
+ echo $errorstring;
 // if(!ctype_alpha(first)){
 //     $errorstring .= "First_Non-Alphabetical ";
 // }
