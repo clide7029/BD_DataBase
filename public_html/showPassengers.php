@@ -23,8 +23,8 @@
             //ssn will be shown in blue (see below)
             foreach($result_set as $tuple) {          // <------ Line 24
                 echo "<font color='blue'>$tuple[ssn]</font> $tuple[f_name] $tuple[m_name] $tuple[l_name]<br/>\n";
-            }
-            echo "Team: Skyler Connor Andrew Brian";
+            };
+            echo "\n"
             session_start();
             if($_SESSION['successinsert']){
                 echo "successfully inserted";
