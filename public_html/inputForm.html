@@ -15,32 +15,39 @@
         <h1>Add / Update Passengers</h1>
     </div>
 
-    <div id="addPass">
-        <form id="addInputField" action="createPassenger.php" method="POST">
-            <label for="userInput">Add New Passenger:</label><br>
-            <input type="text" name="ssn" size="11">ssn<br>
-            <input type="text" name="first" size="24">first<br>
-            <input type="text" name="middle" size="24">middle<br>
-            <input type="text" name="last" size="24">last<br>
-            <input type="submit" id="userSubmit" name="userSubmit"><br>
-
-        </form>
-    </div>
-
+    <br>
+    <br>
+    <br>
     <br>
 
-    <div id="updatePass">
-        <form id="updateInputField" action="updatePassenger.php" method="POST">
-            <label for="userInput">Update Passenger:</label><br>
-            <input type="text" name="ssn" size="11">ssn<br>
-            <input type="text" name="value" size="24">new value<br>
-            <input type="submit" id="userSubmit" name="userSubmit">
-            <select name="attribute">
-                <option value="f_name" name="first">First</option>
-                <option value="m_name" name="middle">Middle</option>
-                <option value="l_name" name="last">Last</option>
-            </select> attribute
-        </form>
+    <div class="formInput">
+        <div id="addPass">
+            <form id="addInputField" action="createPassenger.php" method="POST">
+                <label for="userInput">Add New Passenger:</label><br>
+                <input type="text" name="ssn" size="11">ssn<br>
+                <input type="text" name="first" size="24">first<br>
+                <input type="text" name="middle" size="24">middle<br>
+                <input type="text" name="last" size="24">last<br>
+                <input type="submit" id="userSubmit" name="userSubmit"><br>
+
+            </form>
+        </div>
+
+        <br>
+
+        <div id="updatePass">
+            <form id="updateInputField" action="updatePassenger.php" method="POST">
+                <label for="userInput">Update Passenger:</label><br>
+                <input type="text" name="ssn" size="11">ssn<br>
+                <input type="text" name="value" size="24">new value<br>
+                <input type="submit" id="userSubmit" name="userSubmit">
+                <select name="attribute">
+                    <option value="f_name" name="first">First</option>
+                    <option value="m_name" name="middle">Middle</option>
+                    <option value="l_name" name="last">Last</option>
+                </select> attribute
+            </form>
+        </div>
     </div>
 </body>
 

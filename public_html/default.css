@@ -23,3 +23,7 @@ button {
     padding: 24px;
     background-color: aqua;
 }
+
+.formInput {
+    padding: 15px;
+}
