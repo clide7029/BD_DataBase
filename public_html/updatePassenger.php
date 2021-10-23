@@ -15,7 +15,7 @@ $tempSSN = implode("", $tempSSN);
 if(!is_numeric($tempSSN)){
     $errorstring .= "SSN_Not_Numeric ";
 }
-if($attribute == "first"){
+if($attribute == "f_name"){
     $first =$_POST['value'];
     if($first == ""){
         $errorstring .= "First_Empty ";
@@ -27,10 +27,10 @@ if($attribute == "first"){
         $errorstring .= "First_Non-Alphabetical ";
     }
 }
-if($attribute == "middle"){
+if($attribute == "m_name"){
     $middle =$_POST['value'];
 }
-if($attribute == "last"){
+if($attribute == "l_name"){
     $last =$_POST['value'];
     if($last == ""){
         $errorstring .= "Last_Empty ";
