@@ -1,41 +1,29 @@
-<!doctype html>
+<!DOCTYPE html>
+<html>
 
-<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <title>BofaDeez DataBases</title>
-  <meta name="description" content="BofaDeez CS455 DataBases Server">
-  <meta name="author" content="Skyler, Andrew, Connor, Brian">
-  <link rel="stylesheet" href="main.css">
-
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="default.css">
 </head>
 
 <body>
-  
-    <header class="site-header">
-        <div class="container">
-            <a href="index.html">
-                <h1>BofaDeez DataBases</h1>
-		<h2>Skyler, Andrew, Connor, Brian</h2>
-                <img class="logo" alt="Logo" src="https://p6.pstatp.com/origin/pgc-image/5b76aa4182f14d82b35ee878e694908c.jpeg">
-            </a>
-	</div>
-    </header>
-	<div class = "container">
-            <p><br>1. systemctl status apache2</p>
-            <p><br>2. GET and HEAD are safe commands whereas POST is an unsafe command</p>
-	    <p><br>3. ServerRoot: The top of the directory tree under which the server's # configuration, error, and log files are kept.<br> DocumentRoot: This is the root of where all the files and data is stored from your serve</p>
-	    <p><br>4. The default port is 80, the fact that we don't have to specify means that the port for most if not all servers is 80.<br></p>
-	    <p><br>5. Traffic logs stored in /etc/var/log/messages directory path: CustomLog ${APACHE_LOG_DIR}/access.log<br>Error logs stored in ErrorLog: ${APACHE_LOG_DIR}/error.log<br> You can view the last 10 lines of a file with the tail command (tail file)</p>
-	    <p><br>6. The directory index is the main file that the server hosts it is helpful to allow navigation and make it clear where the user should end up</p>
-	    <p><br>7. We would check if the response code starts with a 4, if it does we would use the following html code: meta http-equiv = ''refresh'' content = ''time; URL=new_url'' with new_url being the proper page and time being the dela</p>
-	    <p><br>8. To give every user on your linux server their own web space you use the command: sudo a2enmod userdir</p>
-	</div>
-    </section>
+
+    <div class="header">
+        <h1>Andrew, Brian, Connor, Skyler</h1>
+    </div>
+
+    <br>
+    <br>
+    <br>
+
+    <button onclick="window.location.href='inputForm.html'">Add/Update Passengers</button>
+    <button onclick="window.location.href='showPassenger.php'">Show Passengers</button>
 
 
 </body>
-</html>
 
+</html>
