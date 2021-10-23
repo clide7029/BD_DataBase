@@ -1,4 +1,5 @@
 <?php
+session_start();
 $ssn = $_POST['ssn'];
 $attribute = $_POST['attribute'];
 $value = $_POST['value'];
@@ -43,12 +44,9 @@ if($attribute == "l_name"){
     }
 }
 if($errorstring != ""){
-    //header('Location: ./inputForm.html');
     echo "<script>alert('INVALID FIELDS'.concat(' $errorstring'));
         window.location.href = './inputForm.html';
-    </script>"; //make this send to skyler
-    //echo '<script type="text/JavaScript"> prompt("GeeksForGeeks");</script>';
-    //exit("");
+    </script>"; 
     exit("");
 
 }
@@ -81,6 +79,7 @@ $db_file = './myDB/airport.db';
             $stmt -> execute();
             }
 
+    
     echo "success";
     $_SESSION['successupdate'] = true;
     header('Location: ./showPassengers.php');
