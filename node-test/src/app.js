@@ -15,6 +15,6 @@ app.listen(port, () => {
 
 
 app.get("/", (req, resp) => {
-    resp.send("hello world");
+    resp.send("brian sucks bofadeez");
     // resp.render()
 })
