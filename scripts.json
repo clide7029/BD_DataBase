@@ -14,7 +14,7 @@
         "title": "start",
         "description": "start server",
         "key": "start",
-        "script": "sudo nodemon bundle.js",
+        "script": "nodemon app.js",
         "keywords": [
             "npm",
             "start",

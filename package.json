@@ -6,7 +6,7 @@
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "update": "git fetch origin main && git reset --hard FETCH_HEAD",
-        "start": "sudo nodemon bundle.js"
+        "start": "nodemon app.js"
     },
     "repository": {
         "type": "git",
