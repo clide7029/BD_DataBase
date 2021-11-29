@@ -10,6 +10,18 @@
             "fetch",
             "reset"
         ]
+    }, {
+        "title": "start",
+        "description": "start server",
+        "key": "start",
+        "script": "sudo nodemon bundle.js",
+        "keywords": [
+            "npm",
+            "start",
+            "restart",
+            "app",
+            "bundle"
+        ]
     }
 
 ]
