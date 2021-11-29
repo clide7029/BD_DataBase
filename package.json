@@ -5,7 +5,8 @@
     "main": "app.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "start": "nodemon ./node-test/app.js"
+        "update": "git fetch origin main && git reset --hard FETCH_HEAD",
+        "start": "nodemon bundle.js"
     },
     "author": "",
     "license": "ISC",
