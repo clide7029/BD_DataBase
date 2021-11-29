@@ -1,0 +1,15 @@
+[{
+        "title": "update",
+        "description": "get the most up-to-date version of git repo",
+        "key": "update",
+        "script": "git fetch origin main && git reset --hard FETCH_HEAD",
+        "keywords": [
+            "npm",
+            "update",
+            "pull",
+            "fetch",
+            "reset"
+        ]
+    }
+
+]

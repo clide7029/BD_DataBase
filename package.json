@@ -6,7 +6,11 @@
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "update": "git fetch origin main && git reset --hard FETCH_HEAD",
-        "start": "nodemon bundle.js"
+        "start": "sudo nodemon bundle.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/clide7029/BD_DataBase"
     },
     "author": "",
     "license": "ISC",
