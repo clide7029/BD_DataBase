@@ -7,7 +7,7 @@ const express = require("express");
 const app = express();
 
 
-
+app.set("view engine", "ejs");
 
 app.listen(port, () => {
     console.log(`web server running on port ${port}`);
