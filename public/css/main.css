@@ -1,0 +1,33 @@
+html {
+  color: white;
+}
+
+body {
+  background-color: rgb(20, 20, 20);
+  margin: 0px;
+}
+
+.header {
+  padding: 60px;
+  width: 100%;
+  text-align: center;
+  background-color: rgb(41, 173, 74);
+}
+
+h1 {
+  font-size: 32pt;
+}
+
+button {
+  margin: 30px;
+  padding: 24px;
+  background-color: aqua;
+}
+
+.formInput {
+  padding: 15px;
+}
+
+.content {
+  padding: 15px;
+}
