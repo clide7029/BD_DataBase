@@ -1,4 +1,4 @@
-const request = require("./requestStockAPI");
+// const request = require("./requestStockAPI");
 
 
 const hostname = "127.0.0.1";
