@@ -6,6 +6,8 @@
 .ssh/*
 Desktop/*
 snap/*
+node_modules/*
+!npm/*
 .bash_history
 .bash_logout
 .bash_profile
