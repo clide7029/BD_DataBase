@@ -1,0 +1,17 @@
+.atom/*
+.cache/*
+.config/*
+.local/*
+.npm/*
+.ssh/*
+Desktop/*
+snap/*
+node_modules/*
+.bash_history
+.bash_logout
+.bash_profile
+.bashrc
+.profile
+.sqlite_history
+.sudo_as_admin_successful
+.wgets-hsts
