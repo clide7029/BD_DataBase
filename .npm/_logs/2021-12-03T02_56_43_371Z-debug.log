@@ -1,0 +1,16 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/bin/node', '/usr/bin/npm', 'run', 'start' ]
+2 info using npm@6.14.4
+3 info using node@v10.19.0
+4 verbose config Skipping project config: /home/dbteam/.npmrc. (matches userconfig)
+5 verbose run-script [ 'prestart', 'start', 'poststart' ]
+6 info lifecycle test@1.0.0~prestart: test@1.0.0
+7 info lifecycle test@1.0.0~start: test@1.0.0
+8 verbose lifecycle test@1.0.0~start: unsafe-perm in lifecycle true
+9 verbose lifecycle test@1.0.0~start: PATH: /usr/share/npm/node_modules/npm-lifecycle/node-gyp-bin:/home/dbteam/node_modules/.bin:/Applications/Sublime Text.app/Contents/SharedSupport/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+10 verbose lifecycle test@1.0.0~start: CWD: /home/dbteam
+11 silly lifecycle test@1.0.0~start: Args: [ '-c', 'nodemon app.js' ]
+12 timing npm Completed in 2768ms
+13 error cb() never called!
+14 error This is an error with npm itself. Please report this error at:
+15 error <https://npm.community>
