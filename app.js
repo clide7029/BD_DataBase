@@ -17,4 +17,4 @@ app.listen(port, () => {
 app.get("/", (req, resp) => {
     // resp.send("brian sucks bofadeez");
     resp.render("home.ejs");
-})
+});
