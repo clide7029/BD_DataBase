@@ -16,7 +16,7 @@ body {
 
 .header {
   text-align: center;
-  height: 50px;
+  height: 100px;
   top: 0;
   background-color: rgb(41, 173, 74);
 }
@@ -49,6 +49,7 @@ body {
 
 h1 {
   font-size: 32pt;
+  padding: 0px;
 }
 
 .formInput {
