@@ -1,62 +1,3 @@
-ls
-atom
-sudo atom
-atom main.css
-$path
-ls
-atom index.html
-sudo &nano index.html
-pulse index.html
-wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -
-echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
-sudo apt-get update
-sudo apt-get install sublime-text
-subl index.html
-sudo apachectl restart
-sudo apachectl start
-Include ports.conf
-more etc/var
-more etc/var/
-more var/
-more etc/
-more /etc/
-more /etc
-more /var/log/messages
-more /var/log/messages
-more syslog.conf
-more /syslog.conf
-more etc/directory
-more etc/Directory.conf
-more etc/directory.conf
-more etc/
-more /etc
-sudo etc/directory
-sudo more etc/directory
-more
-find /home/dbteam/public_html
-move etc/home/dbteam/public_html
-more etc/home/dbteam/public_html
-more etc/home/
-more etc/
-more /etc/home/
-more /etc
-more /var/www/html/index.html
-more /var
-more /var/w
-more /var/www/html/
-more /var/www/html/index.html
-more /etc/default/useradd
-sudo useradd -m -d Brian
-sudo useradd -m Brian
-sudo useradd -m Brian
-more sudo useradd -m -d /opt/username username
-more /home/dbteam/public_html
-ln -s /home/dbteam/publicindex.html
-more /home/dbteam/public_html/index.html
-more /home/dbteam/public_html/index.html
-cd public_html
-ls
-emax index.html
 emacks index.html
 emacs index.html
 ls
@@ -498,3 +439,62 @@ cd ..
 ls
 exit
 exit
+npm run update
+npm run start
+npm run start
+node app.js
+npm --help
+npm help npm
+npm help
+npm stop
+npm restart
+npm restart
+npm run update
+npm run start
+npm run un update
+npm run update
+npm start
+npm run update
+npm start
+npm install -g npm
+sudo npm install -g npm
+npm run start
+node app.js
+npm run update
+npm run start
+npm run update
+npm run start
+npm run start
+npm -v
+node -v
+npm install -g node
+pip install node
+node -v
+sudo apt update
+dpkg --list
+dpkg --list | grep sublime
+sudo apt purge sublime
+sudo apt purge sublime-text
+dpkg --list | grep atom
+sudo apt purge atom
+sudo apt clean
+sudo apt autoremove
+dpkg --list | grep text
+dpkg --list
+apt update node
+sudo apt install curl
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
+source ~/.bashrc
+nvm --version
+nvm ls
+nvm ls-remote
+nvm install [v14.18.2]
+nvm -v
+nvm -ls
+nvm ls
+npm run start
+node app.js
+`.
+
+pwd
+

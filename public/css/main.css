@@ -16,10 +16,18 @@ body {
 
 .header {
   text-align: center;
-  height: 100px;
   top: 0;
+  overflow: hidden;
   background-color: rgb(41, 173, 74);
 }
+
+.header h1 {
+  margin-bottom: 0px;
+}
+
+/* .header span {
+    display: inline-block;
+} */
 
 .footer {
   height: 50px;
@@ -32,12 +40,6 @@ body {
   bottom: 50px;
 }
 
-/* Add a black background color to the top navigation */
-.navbar {
-  overflow: hidden;
-}
-
-/* Style the links inside the navigation bar */
 .navbar button {
   float: left;
   color: white;
