@@ -14,10 +14,10 @@
     <div class="header">
         <h1>Stock App</h1>
         <div class="navbar">
-            <button id="home">Home</button>
-            <button id="profile">Profile</button>
+            <button id="home"><%= home %></button>
+            <button id="profile"><%= nav %></button>
             <form action="/logout?_method=DELETE" method="POST">
-                <button type="submit">Log Out</button>
+                <button type="submit"><%= logAction %></button>
             </form>
             <form action="/createUser?_method=CREATE" method="POST">
                 <button type="submit">Login</button>
