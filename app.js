@@ -4,9 +4,12 @@
 const hostname = "127.0.0.1";
 const port = 8000 //http = 80, ssh = 22
 const express = require("express");
+const bodyParser = require("body-parser")
 const app = express();
 
 app.use(express.static("public"));
+app.use(bodyParser.urlencoded({ extended: true }))
+
 app.set("view engine", "ejs");
 
 app.listen(port, () => {
@@ -17,4 +20,14 @@ app.listen(port, () => {
 app.get("/", (req, resp) => {
     // resp.send("brian sucks bofadeez");
     resp.render("home.ejs");
+});
+
+app.post("/logout", (req, resp) => {
+    resp.send(req.query);
+    // resp.render("home.ejs");
+});
+
+app.post("/search", (req, resp) => {
+    resp.send(req.body.search);
+    // resp.render("home.ejs");
 });
