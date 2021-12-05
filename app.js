@@ -10,24 +10,34 @@ const app = express();
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }))
 
+var routes = require('./public/routes/router');
+
+
 app.set("view engine", "ejs");
+
+
+
+// require("./lib/userHandling.js")(app);
 
 app.listen(port, () => {
     console.log(`web server running on port ${port}`);
 });
 
 
-app.get("/", (req, resp) => {
-    // resp.send("brian sucks bofadeez");
-    resp.render("home.ejs");
-});
+app.use('/router', routes);
 
-app.post("/logout", (req, resp) => {
-    resp.send(req.query);
-    // resp.render("home.ejs");
-});
 
-app.post("/search", (req, resp) => {
-    resp.send(req.body.search);
-    // resp.render("home.ejs");
-});
+// app.get("/", (req, resp) => {
+//     // resp.send("brian sucks bofadeez");
+//     resp.render("home.ejs");
+// });
+
+// app.post("/logout", (req, resp) => {
+//     resp.send(req.query);
+//     // resp.render("home.ejs");
+// });
+
+// app.post("/search", (req, resp) => {
+//     resp.send(req.body.search);
+//     // resp.render("home.ejs");
+// });
