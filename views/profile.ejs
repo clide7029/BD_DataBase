@@ -7,9 +7,36 @@
             <span></span>
         </div>
 
+        <div class="portfolio-container">
+            <table id="portfolio">
+                <tr>
+                    <th>Ticker</th>
+                    <th>price</th>
+                    <th>shares</th>
+                    <th>return</th>
+                </tr>
+                <% for (let i = 0; i < port.length; i++) { %>
+                    <tr class="portRow" id=<%=` port${i}` %>>
+                        <% for (let j = 0; j < 4; j++) { %>
+                            <% if(j == 0){ %>
+                                <td class="ticker">
+                                    <%}else if(j==3){%>
+                                        <td class="return">
+                                            <% } else {%>
+                                                <td>
+                                                    <% } %>
+                                                        <%= port[i][j] %>
+                                                </td>
+                                                <% } %>
+                    </tr>
+                    <% } %>
+            </table>
+        </div>
+
 
 
     </div>
+
 
     <script src="app.js"></script>
 

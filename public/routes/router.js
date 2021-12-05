@@ -3,11 +3,11 @@ var express = require('express'),
 
 var userRoutes = require('./userRoutes');
 
-router 
+router
     .get('/', function(req, res) {
-        res.send("routes");
+        res.render("home.ejs")
     })
 
-    .use('/userRoutes', userRoutes);
+.use('/userRoutes', userRoutes);
 
 module.exports = router;

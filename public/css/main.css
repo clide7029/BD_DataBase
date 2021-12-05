@@ -60,5 +60,27 @@ h1 {
 }
 
 .content {
-    padding: 15px;
+    position: absolute;
+    margin: auto;
+    left: 50px;
+    right: 50px;
+}
+
+#searchStock {
+    width: 100px;
+    height: 100px;
+    background-color: blueviolet;
+}
+
+.portfolio-container {
+    border: 5px;
+    border-style: ridge;
+}
+
+#portfolio {
+    margin: 0px;
+}
+
+tr:hover .ticker {
+    background: rgb(41, 173, 74);
 }

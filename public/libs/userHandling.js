@@ -1,5 +1,5 @@
 if (process.env.NODE_ENV !== 'production') {
-    require('dotenv').config() 
+    require('dotenv').config()
 }
 
 const express = require('express')
@@ -10,13 +10,10 @@ const flash = require('express-flash')
 const session = require('express-session')
 const methodOverride = require('method-override')
 const dbfunc = require('./databaseFunctions')
-
-const username = dbfunc.queryEqual('User', 'username', 'username', user.username);
-const email = dbfunc.queryEqual('User', 'email', 'email', user.email);
-initializePassport(passport, username, email) //Select from table instead of users remove id make sure username is unique
+const initializePassport = require('./passportConfig')
 
 app.set('view-engine', 'ejs')
-app.use(express.urlencoded({extended: false}))
+app.use(express.urlencoded({ extended: false }))
 app.use(flash())
 app.use(session({
     secret: process.env.SESSION_SECRET,
@@ -27,7 +24,15 @@ app.use(passport.initialize())
 app.use(passport.session())
 app.use(methodOverride('_method'))
 
-// app.get('/', checkAuthenticated, (req,res) => {
+// const username = dbfunc.queryEqual('User', 'username', 'username', user.username);
+// const email = dbfunc.queryEqual('User', 'email', 'email', user.email);
+// initializePassport(passport, username, email);
+// initializePassport(passport, "dummy", "brant") //Select from table instead of users remove id make sure username is unique
+
+// let name = user.NODE_ENV;
+// console.log(name);
+
+// app.get('/test', checkAuthenticated, (req,res) => {
 //     res.render('home.ejs') //, {name: req.user.username}) if we want to display username on homepage
 // })
 // app.get('/userLogin', checkNotAuthenticated, (req, res) => {
@@ -74,5 +79,22 @@ function checkNotAuthenticated(req, res, next) {
 }
 // app.listen(3000)
 
-module.exports = checkAuthenticated, checkNotAuthenticated;
+// module.exports = {
+//         checkAuthenticated: function(req, res, next) {
+//             if (req.isAuthenticated()) {
+//                 return next()
+//             }
+
+//             res.redirect('/userLogin')
+//         },
+
+//         checkNotAuthenticated: function(req, res, next) {
+//                 if (req.isAuthenticated()) {
+//                     return res.redirect('/')
+//                 }
+//                 next()
+//             }
+//             // app.listen(3000)
+
+//     }
 //Check strategy tab thingy
