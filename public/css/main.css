@@ -1,86 +1,103 @@
 html {
-    color: white;
+  color: white;
 }
 
 body {
-    background-color: rgb(20, 20, 20);
-    margin: 0px;
+  background-color: rgb(20, 20, 20);
+  margin: 0px;
 }
 
 .header,
 .footer,
 .content {
-    position: absolute;
-    width: 100%;
+  position: absolute;
+  width: 100%;
 }
 
 .header {
-    text-align: center;
-    top: 0;
-    overflow: hidden;
-    background-color: rgb(41, 173, 74);
+  text-align: center;
+  top: 0;
+  overflow: hidden;
+  background-color: rgb(41, 173, 74);
 }
 
 .header h1 {
-    margin-bottom: 0px;
+  margin-bottom: 0px;
 }
-
 
 /* .header span {
     display: inline-block;
 } */
 
 .footer {
-    height: 50px;
-    bottom: 0;
-    background-color: rgba(36, 36, 36, 0.829);
+  height: 50px;
+  bottom: 0;
+  background-color: rgba(36, 36, 36, 0.829);
 }
 
 .content {
-    top: 200px;
-    bottom: 50px;
+  top: 200px;
+  bottom: 50px;
 }
 
 .navbar button {
-    float: left;
-    color: white;
-    background-color: black;
-    text-align: center;
-    text-decoration: none;
-    font-size: 17px;
+  float: left;
+  color: white;
+  background-color: black;
+  text-align: center;
+  text-decoration: none;
+  font-size: 17px;
 }
 
 h1 {
-    font-size: 32pt;
-    padding: 0px;
+  font-size: 32pt;
+  padding: 0px;
 }
 
 .formInput {
-    padding: 15px;
+  padding: 15px;
 }
 
 .content {
-    position: absolute;
-    margin: auto;
-    left: 50px;
-    right: 50px;
+  position: absolute;
+  margin: auto;
+  padding: 50px;
 }
 
 #searchStock {
-    width: 100px;
-    height: 100px;
-    background-color: blueviolet;
+  width: 100px;
+  height: 100px;
+  background-color: blueviolet;
+}
+
+.buyForm {
+  margin-bottom: 20px;
+}
+
+#buybtn {
+  background-color: green;
+}
+
+#sellbtn {
+  background-color: red;
 }
 
 .portfolio-container {
-    border: 5px;
-    border-style: ridge;
+  margin: auto;
 }
 
 #portfolio {
-    margin: 0px;
+  border: 5px;
+  border-style: ridge;
 }
 
-tr:hover .ticker {
-    background: rgb(41, 173, 74);
+#portfolio tr:hover .ticker {
+  background: rgb(41, 173, 74);
+}
+
+#portfolio th,
+td {
+  padding-left: 10px;
+  padding-right: 10px;
+  text-align: center;
 }
