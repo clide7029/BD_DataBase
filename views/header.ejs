@@ -14,21 +14,21 @@
     <div class="header">
         <h1>Stock App</h1>
         <div class="navbar">
-            <form action="/router" method="GET">
+            <form action="/" method="GET">
                 <button type="submit" >Home</button>
             </form>
-            <form action="/router/userRoutes/userProfile" method="GET">
+            <form action="/userRoutes/userProfile" method="GET">
                 <button type="submit" >Profile</button>
             </form>
             <% if(logAction == "Auth"){ %> 
-                <form action="/logout?_method=DELETE" method="POST">
+                <form action="/userRoutes/logout?_method=DELETE" method="POST">
                     <button type="submit">Logout</button>
                 </form>
             <% } else if(logAction == "notAuth") { %>
-                <form action="/router/userRoutes/userCreation" method="GET">
+                <form action="/userRoutes/userCreation" method="GET">
                     <button type="submit">Register</button>
                 </form>
-                <form action="/router/userRoutes/userLogin" method="GET">
+                <form action="/userRoutes/userLogin" method="GET">
                     <button type="submit">Login</button>
                 </form>
             <% } %>

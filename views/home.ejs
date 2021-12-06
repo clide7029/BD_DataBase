@@ -7,25 +7,23 @@
             <span></span>
         </div>
 
-        <% r = (typeof(range) !== 'undefined') %> 
-        <% if (r) { %>
+
+        <% if (r = (typeof(range) !== 'undefined')) { %>
             <%= range %>
         <% } %>
-        <% s = (typeof(stock) !== 'undefined') %> 
-         <%= s %> 
-         <% if (s) { %>
+         <% if (s = (typeof(stock) !== 'undefined')) { %>
          <%= s %> 
         <% } %>
 
        
-        <form class="search" action="/router" method="POST">
+        <form class="search" action="/" method="POST">
             <input type="search" placeholder="Search..." name="stock">
             <input type="submit" value=&#x2315>
         </form>
         <br>
 
         <% if(s){ %>
-            <form class="timeRange" action="/router" method="POST">
+            <form class="timeRange" action="/" method="POST">
                 <input type="hidden" value="<%=stock%>" name="stock">
                 <button type="submit" id="1d" value="1d" name="range">1d</button>
                 <button type="submit" id="3d" value="3d" name="range">3d</button>

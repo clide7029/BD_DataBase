@@ -74,26 +74,24 @@ router.delete('/logout', (req, res) => {
 
 router.get('/userProfile', (req, res) => {
 
-    let port = [
-        [0, 2, 1, 3],
-        [1, 4, 2, 4],
-        [2, 2, 3, 2],
-        [3, 3, 2, 2]
-    ];
-    res.render("profile.ejs", { port: port });
+    res.render("profile.ejs", { port: [["this was a get req"]] });
     // profile.addRowHandlers(Document);
 })
 
-router.post('/userProfile', (req, res) => {
+router.post('/userProfile', async function(req, res) {
+    // let mostrecentprice = dbfunc.currentStockPrice(req.body.tickerID)
+    let mostrecentprice = 0;
+    console.log(`ticker = ${ req.body.tickerID }`);
+    console.log(`shares = ${ req.body.shares }`);
+    console.log(`price = ${ mostrecentprice }`);
+    if(typeof(req.body.tickerID) !== 'undefined') {
+        console.log("adding portfolio");
+        dbfunc.addPortfolio("Dumbuser",req.body.tickerID, req.body.shares,mostrecentprice);
+        console.log("portfolio added");
+    }
+    let port = dbfunc.queryEqual('portfolio','username','Dumbuser');
 
-    let port = [
-        [0, 2, 1, 3],
-        [1, 4, 2, 4],
-        [2, 2, 3, 2],
-        [3, 3, 2, 2]
-    ];
-
-    console.log(`post ${req.body.tickerID }`)
+    console.log(port)
     res.render("profile.ejs", { port: port , name: req.body.tickerID });
     // profile.addRowHandlers(Document);
 })

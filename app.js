@@ -10,7 +10,10 @@ const app = express();
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }))
 
-var routes = require('./public/routes/router');
+var routes = require('./public/routes/r');
+
+// var builder = require('./public/libs/buildtable');
+// builder.createDatabase();
 
 
 app.set("view engine", "ejs");
@@ -24,7 +27,7 @@ app.listen(port, () => {
 });
 
 
-app.use('/router', routes);
+app.use('/', routes);
 
 
 // app.get("/", (req, resp) => {

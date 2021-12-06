@@ -9,14 +9,6 @@ router
     })
 
     .post('/', function(req, res) {
-        let search = { 
-            range: req.body.range,
-            stock: req.body.searchStock
-        };
-
-        console.log(`stock: ${search.stock}`);
-        console.log(`range: ${search.range}`);
-
 
         res.render("home.ejs", search);
     })
