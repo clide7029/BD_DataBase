@@ -1,4 +1,4 @@
-<%- include("header.ejs", { home: "Home", nav: "Profile", logAction: "Logout"}) %>
+<%- include("header.ejs", { home: "Home", nav: "Profile", logAction: "notAuth"}) %>
 
     <div class="content">
         <div class="hero">
@@ -7,27 +7,41 @@
             <span></span>
         </div>
 
+        <h1>
+            <% if(typeof(name) !== 'undefined'){ %> 
+                <%= name %>
+                <% } %>
+        </h1>
+
+        <div class="buyForm">
+            
+        </div>
+
         <div class="portfolio-container">
             <table id="portfolio">
                 <tr>
                     <th>Ticker</th>
                     <th>price</th>
                     <th>shares</th>
-                    <th>return</th>
                 </tr>
                 <% for (let i = 0; i < port.length; i++) { %>
                     <tr class="portRow" id=<%=` port${i}` %>>
                         <% for (let j = 0; j < 4; j++) { %>
                             <% if(j == 0){ %>
                                 <td class="ticker">
-                                    <%}else if(j==3){%>
-                                        <td class="return">
-                                            <% } else {%>
-                                                <td>
-                                                    <% } %>
-                                                        <%= port[i][j] %>
-                                                </td>
-                                                <% } %>
+                            <%}else {%>
+                                <td>
+                            <% } %>
+                            <% if(j == 3) { %>
+                                <form action="./userProfile" method="POST">
+                                    <button type="submit" id="tickerButton<%=i%>" name="tickerID" value="<%=port[i][0]%>">visualize</button>
+                                </form>
+                            <% }else{ %>
+                                <%= port[i][j] %>
+                            <% } %>
+                                </td>
+                            <% } %>
+                        </form>
                     </tr>
                     <% } %>
             </table>
@@ -37,7 +51,12 @@
 
     </div>
 
+<script>
+    function plotPort(i){
+        
 
+    }
+</script>
     <script src="app.js"></script>
 
     <%- include("footer.ejs") %>

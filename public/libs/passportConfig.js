@@ -9,7 +9,7 @@ function initialize(passport, getUsername, getUserByEmail) {
         }
 
         try {
-            if (await bcrypt.compare(password, user.password)) {
+            if (await bcrypt.compare(password, queryEqual('User', 'password', 'username', user))) {
                 return done(null, user)
             } 
             else {

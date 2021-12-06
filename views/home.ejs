@@ -1,4 +1,4 @@
-<%- include("header.ejs", { home: "Home", nav: "Profile", logAction: "Logout"}) %>
+<%- include("header.ejs", { home: "Home", nav: "Profile", logAction: "notAuth"}) %>
 
     <div class="content">
         <div class="hero">
@@ -7,26 +7,39 @@
             <span></span>
         </div>
 
-        <form class="search" action="/search" method="POST">
-            <input type="search" placeholder="Search..." name="search">
+        <% r = (typeof(range) !== 'undefined') %> 
+        <% if (r) { %>
+            <%= range %>
+        <% } %>
+        <% s = (typeof(stock) !== 'undefined') %> 
+         <%= s %> 
+         <% if (s) { %>
+         <%= s %> 
+        <% } %>
+
+       
+        <form class="search" action="/router" method="POST">
+            <input type="search" placeholder="Search..." name="stock">
             <input type="submit" value=&#x2315>
         </form>
         <br>
 
-
-        <form class="timeRange" action="/" method="POST">
-            <input type="button" id="1d" value="1d" name="1d">
-            <input type="button" id="3d" value="3d" name="3d">
-            <input type="button" id="5d" value="5d" name="5d">
-            <input type="button" id="1w" value="1w" name="1w">
-            <input type="button" id="2w" value="2w" name="2w">
-            <input type="button" id="1m" value="1m" name="1m">
-            <input type="button" id="3m" value="3m" name="3m">
-            <input type="button" id="6m" value="6m" name="6m">
-            <input type="button" id="1y" value="1y" name="1y">
-        </form>
-        <canvas id="searchStock"></canvas>
-
+        <% if(s){ %>
+            <form class="timeRange" action="/router" method="POST">
+                <input type="hidden" value="<%=stock%>" name="stock">
+                <button type="submit" id="1d" value="1d" name="range">1d</button>
+                <button type="submit" id="3d" value="3d" name="range">3d</button>
+                <button type="submit" id="5d" value="5d" name="range">5d</button>
+                <button type="submit" id="1w" value="1w" name="range">1w</button>
+                <button type="submit" id="2w" value="2w" name="range">2w</button>
+                <button type="submit" id="1m" value="1m" name="range">1m</button>
+                <button type="submit" id="3m" value="3m" name="range">3m</button>
+                <button type="submit" id="6m" value="6m" name="range">6m</button>
+                <button type="submit" id="1y" value="1y" name="range">1y</button>
+            </form>
+            <br>
+            <canvas id="stockGraph"></canvas>
+        <% } %>
     </div>
 
     <script src="app.js"></script>

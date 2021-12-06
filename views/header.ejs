@@ -14,14 +14,24 @@
     <div class="header">
         <h1>Stock App</h1>
         <div class="navbar">
-            <button id="home"><%= home %></button>
-            <button id="profile"><%= nav %></button>
-            <form action="/logout?_method=DELETE" method="POST">
-                <button type="submit"><%= logAction %></button>
+            <form action="/router" method="GET">
+                <button type="submit" >Home</button>
             </form>
-            <form action="/userCreation" method="POST">
-                <button type="submit">create</button>
+            <form action="/router/userRoutes/userProfile" method="GET">
+                <button type="submit" >Profile</button>
             </form>
+            <% if(logAction == "Auth"){ %> 
+                <form action="/logout?_method=DELETE" method="POST">
+                    <button type="submit">Logout</button>
+                </form>
+            <% } else if(logAction == "notAuth") { %>
+                <form action="/router/userRoutes/userCreation" method="GET">
+                    <button type="submit">Register</button>
+                </form>
+                <form action="/router/userRoutes/userLogin" method="GET">
+                    <button type="submit">Login</button>
+                </form>
+            <% } %>
         </div>
 
 

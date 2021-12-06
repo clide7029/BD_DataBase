@@ -10,6 +10,7 @@ const passport = require('passport')
 const flash = require('express-flash')
 const session = require('express-session')
 const methodOverride = require('method-override')
+const bodyParser = require('body-parser');
 
 const initializePassport = require('../libs/passportConfig')
 const userHandler = require('../libs/userHandling')
@@ -17,7 +18,8 @@ const dbfunc = require('../libs/databaseFunctions')
 const profile = require('../libs/profileListeners');
 
 app.set('view-engine', 'ejs')
-app.use(express.urlencoded({ extended: false }))
+app.use(express.urlencoded({ extended: false })); 
+// app.use(bodyParser.urlencoded({ extended: false }));
 app.use(flash())
 app.use(session({
     secret: process.env.SESSION_SECRET,
@@ -79,6 +81,20 @@ router.get('/userProfile', (req, res) => {
         [3, 3, 2, 2]
     ];
     res.render("profile.ejs", { port: port });
+    // profile.addRowHandlers(Document);
+})
+
+router.post('/userProfile', (req, res) => {
+
+    let port = [
+        [0, 2, 1, 3],
+        [1, 4, 2, 4],
+        [2, 2, 3, 2],
+        [3, 3, 2, 2]
+    ];
+
+    console.log(`post ${req.body.tickerID }`)
+    res.render("profile.ejs", { port: port , name: req.body.tickerID });
     // profile.addRowHandlers(Document);
 })
 
