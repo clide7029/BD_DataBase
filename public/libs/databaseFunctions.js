@@ -3,48 +3,7 @@ const sqlite3 = require('sqlite3').verbose();
 const test = require('./data/test');
 var returnList =[[]]
 module.exports = {
-    // addUser: function(username, password, email, currency) {
-    //     var db = new sqlite3.Database('database.db');
-    //     var stmt = db.prepare("INSERT INTO User VALUES (?,?,?,false,?)");
-    //     stmt.run(username, password, email, currency);
-    //     stmt.finalize();
-    //     db.close();
-    // },
-    // addTicker: function(ticker, exchange) {
-    //     var db = new sqlite3.Database('database.db');
-    //     var stmt = db.prepare("INSERT INTO Ticker VALUES (?,?)");
-    //     stmt.run(ticker, exchange);
-    //     stmt.finalize();
-    //     db.close();
-    // },
-    // addPricing: function(ticker, day, openprice, closeprice) {
-    //     var db = new sqlite3.Database('database.db');
-    //     var stmt = db.prepare("INSERT INTO Pricing VALUES (?,?,?,?)");
-    //     stmt.run(ticker, day, openprice, closeprice);
-    //     stmt.finalize();
-    //     db.close();
-    // },
-    // addTickerReturn: function(ticker, day, tickerreturn) {
-    //     var db = new sqlite3.Database('database.db');
-    //     var stmt = db.prepare("INSERT INTO TickerReturn VALUES (?,?,?)");
-    //     stmt.run(ticker, day, tickerreturn);
-    //     stmt.finalize();
-    //     db.close();
-    // },
-    // addSale: function(username, ticker, day, hour, boughtsold) {
-    //     var db = new sqlite3.Database('database.db');
-    //     var stmt = db.prepare("INSERT INTO Sale VALUES (?,?,?,?,?)");
-    //     stmt.run(username, ticker, day, hour, boughtsold);
-    //     stmt.finalize();
-    //     db.close();
-    // },
-    // addOwned: function(username, ticker, numshares) {
-    //     var db = new sqlite3.Database('database.db');
-    //     var stmt = db.prepare("INSERT INTO Owned VALUES (?,?,?)");
-    //     stmt.run(username, ticker, numshares);
-    //     stmt.finalize();
-    //     db.close();
-    // },
+
     addPortfolio: function(username, ticker, numshares, mostrecentprice) {
         var db = new sqlite3.Database('database.db');
         // var stmt = db.prepare("INSERT INTO Portfolio VALUES ( ? , ? , ? , ? )");
@@ -67,34 +26,39 @@ module.exports = {
         });
         db.close();
     },
-    // updateAt: function(table, attributes, value, whereatt, wherevar) {
-    //     var db = new sqlite3.Database('database.db');
-    //     var stmt = db.prepare("UPDATE ? SET ? = ? WHERE ? = ?");
-    //     stmt.run(table, attributes, value, whereatt, wherevar);
-    //     stmt.finalize();
-    //     db.close();
-    // },
-    // updateAt2: function(table, attributes, value, whereatt, wherevar, whereatt2, wherevar2) {
-    //     var db = new sqlite3.Database('database.db');
-    //     var stmt = db.prepare("UPDATE ? SET ? = ? WHERE ? = ? AND ? = ?");
-    //     stmt.run(table, attributes, value, whereatt, wherevar, whereatt2, wherevar2);
-    //     stmt.finalize();
-    //     db.close();
-    // },
-    // remove: function(table, whereatt, wherevar) {
-    //     var db = new sqlite3.Database('database.db');
-    //     var stmt = db.prepare("DELETE FROM ? WHERE ?");
-    //     stmt.run(table, whereatt, wherevar);
-    //     stmt.finalinoze();
-    //     db.close();
-    // },
+    addUser: function(username, password, email) {
+        console.log("enter add to user");
+        var db = new sqlite3.Database('database.db');
+        // var stmt = db.prepare("INSERT INTO Portfolio VALUES ( ? , ? , ? , ? )");
+        // stmt.run(username, ticker, numshares, mostrecentprice);
+        // stmt.finalize();
+        let lockedout=false;
+        let currency=1000;
+        db.serialize(() => {
+            db.run(`INSERT or IGNORE INTO User(username,password,email,lockedout,currency) VALUES ("${username}","${password}","${email}",${lockedout},${currency})`, (err, row) => {
+                //db.run(`INSERT or IGNORE INTO Portfolio(username,ticker,numshares,mostrecentprice) VALUES ("${username}","${ticker}",${numshares},${mostrecentprice}) UPDATE portfolio SET numshares = ${numshares} WHERE username = "${username}" AND ticker = "${ticker}"`, (err, row) => {
+                if(err){
+                throw err;/*
+                    db.run(`UPDATE portfolio SET numshares = ${numshares} WHERE username = "${username}" AND ticker = "${ticker}"`, (err2,row2) =>{
+                        if(err2) {
+                            throw err2;
+                        } 
+                            console.log('updated instead')});
+                    //throw err;*/
+                }
+                //console.log(row.username);
+            });
+        });
+        db.close();
+    },
+
     queryEqual: function(table, whereatt, wherevar) {
         //var returnList = [[]]
         var db = new sqlite3.Database('database.db');
         let sql = 'SELECT * FROM portfolio'
         var iterator = 0
         db.each(sql,(err,row) => {
-            console.log("in db.each");
+            //console.log("in db.each");
             if(err) {
                 throw err;
             }
@@ -113,55 +77,48 @@ module.exports = {
                 }
             iterator++;
         },
+        
         function(){
-            console.log("in return function");
+            //console.log("in return function");
+            //console.log(returnList)
+            db.close();
+            return returnList;
+        }
+        );
+        return returnList
+    },
+    printAllUsers: function() {
+        //var returnList = [[]]
+        var db = new sqlite3.Database('database.db');
+        let sql = 'SELECT * FROM User'
+        var iterator = 0
+        db.each(sql,(err,row) => {
+            //console.log("in db.each");
+            if(err) {
+                throw err;
+            }
+            username = row.username
+            password = row.password
+            email = row.email
+            
+            //for (var i = 0; i < 2; i++) {
+                //var emptyStr = ""
+                returnList[iterator] = {
+                    'username' : username,
+                    'password' : password,
+                    'email' : email
+                }
+            iterator++;
+        },
+        function(){
+            //console.log("in return function");
             console.log(returnList)
             db.close();
             return returnList;
         }
         );
-        // var stmt = db.prepare("SELECT * FROM ? WHERE ? = ?");
-        // var i = 0;   exports
-        // stmt.each(table, whereatt, wherevar, function(err, row) {
-        //     returnList[i] = row;
-        //     i++;
-        // });
-        /*
-        db.serialize(() => {
-            db.each(`SELECT username FROM User`, (err, row) => {
-                if(err){
-                    throw err;
-                }
-                console.log(row.username);
-                returnList[i] = row;
-                i++;
-            });
-        });
-        */
-        // stmt.finalize();
-        //console.log(returnList)
-        //console.log(returnList)
-        //return JSON.parse(returnList);
-        //console.log(returnList[0].username);
         return returnList
     },
-    // queryEqual2: function(table, attribute, whereatt, wherevar, whereatt2, whereval2) {
-    //     var returnList = [];
-    //     var db = new sqlite3.Database('database.db');
-    //     var stmt = db.prepare("SELECT ? FROM ? WHERE ?=? AND ?=?");
-    //     var i = 0;
-    //     stmt.each(attribute, table, whereatt, wherevar, whereatt2, whereval2, function(err, row) {
-    //         returnList[i] = row.attribute;
-    //         i++;
-    //     });
-    //     stmt.finalize();
-    //     db.close();
-    //     return returnList;
-    // },
-
-    // getUserByEmail: function(email) {
-    //     return queryEqual('User', 'email', 'email', email);
-    // },
 
     currentStockPrice: async function(ticker) {
 
@@ -186,6 +143,45 @@ module.exports = {
             return currPrice;
         }
 
+    },
+    updateUserCurr(username,cost){
+        var db = new sqlite3.Database('database.db');
+        let sql=`UPDATE User set currency = ? WHERE username = ?`
+        let currentcurrency=this.getUserCurr(username);
+        let newcurrency=currentcurrency-cost;
+        console.log("new currency = "+newcurrency)
+        let data = [newcurrency,username]
+
+        db.run(sql, data, function(err) {
+            if (err) {
+              return console.error(err.message);
+            }
+            console.log(`Row(s) updated: ${this.changes}`);
+            
+          
+          });
+    },
+    getUserCurr(username){
+        let returnvar ="";
+        var db = new sqlite3.Database('database.db');
+        let sql = `SELECT currency curr FROM user WHERE username = ?`
+        db.get(sql,[username],(err, row) => {
+            if (err) {
+              return console.error(err.message);
+            }
+            return row
+              ? returnvar = row.curr
+              : console.log(`No playlist found with the id ${playlistId}`);
+          
+          },
+          function(){
+            console.log("in return function");
+            console.log(returnvar)
+            db.close();
+            console.log("return var ="+ returnvar);
+            return returnvar;
+        }
+          );
     }
 
 };
