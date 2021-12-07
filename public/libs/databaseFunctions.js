@@ -187,11 +187,11 @@ module.exports = {
         }
 
     },
-    updateUserCurr(username,cost){
+    updateUserCurr(username,change){
         var db = new sqlite3.Database('database.db');
         let sql=`UPDATE User set currency = ? WHERE username = ?`
-        let currentcurrency=this.getUserCurr(username);
-        let newcurrency=currentcurrency-cost;
+        let currentcurrency=this.getUserInfo(username)[0].currency;
+        let newcurrency=currentcurrency+change;
         console.log("new currency = "+newcurrency)
         let data = [newcurrency,username]
 
@@ -204,27 +204,4 @@ module.exports = {
           
           });
     },
-    getUserCurr(username){
-        let returnvar ="";
-        var db = new sqlite3.Database('database.db');
-        let sql = `SELECT currency curr FROM user WHERE username = ?`
-        db.get(sql,[username],(err, row) => {
-            if (err) {
-              return console.error(err.message);
-            }
-            return row
-              ? console.log("row curr="+row.curr)
-              : console.log(`No playlist found with the id ${playlistId}`);
-          
-          },
-          function(){
-            console.log("in return function");
-            console.log(returnvar)
-            db.close();
-            console.log("return var ="+ returnvar);
-            return returnvar;
-        }
-          );
-    }
-
 };
