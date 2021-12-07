@@ -1,6 +1,7 @@
 const axios = require('axios');
 const sqlite3 = require('sqlite3').verbose();
 const test = require('./data/test');
+var returnList =[[]]
 module.exports = {
     // addUser: function(username, password, email, currency) {
     //     var db = new sqlite3.Database('database.db');
@@ -93,7 +94,7 @@ module.exports = {
         let sql = 'SELECT * FROM portfolio'
         var iterator = 0
         db.each(sql,(err,row) => {
-            consoe.log("in db.each");
+            console.log("in db.each");
             if(err) {
                 throw err;
             }
@@ -139,7 +140,6 @@ module.exports = {
         */
         // stmt.finalize();
         //console.log(returnList)
-        db.close();
         //console.log(returnList)
         //return JSON.parse(returnList);
         //console.log(returnList[0].username);
