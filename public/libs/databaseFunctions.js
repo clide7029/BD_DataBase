@@ -2,6 +2,7 @@ const axios = require('axios');
 const sqlite3 = require('sqlite3').verbose();
 const test = require('./data/test');
 var returnList =[[]]
+var returnUsers=[[]]
 module.exports = {
 
     addPortfolio: function(username, ticker, numshares, mostrecentprice) {
@@ -87,6 +88,51 @@ module.exports = {
         );
         return returnList
     },
+    
+    getUserInfo: function(user) {
+        console.log("into getUserInfo");
+        //var returnList = [[]]
+        var db = new sqlite3.Database('database.db');
+        let sql = `SELECT * FROM User where username = (?)`
+        var iterator = 0
+        db.each(sql,[user],(err,row) => {
+            console.log("in db.each")
+            //console.log("in db.each");
+            if(err) {
+                throw err;
+            }
+            username = row.username
+            password = row.password
+            email = row.email
+            lockedout = row.lockedout
+            currency = row.currency
+            console.log(username+"="+row.username)
+            console.log(password+"="+row.password)
+            console.log(email+"="+row.email)
+            
+            //for (var i = 0; i < 2; i++) {
+                //var emptyStr = ""
+                returnUsers[iterator] = {
+                    'username' : username,
+                    'password' : password,
+                    'email' : email,
+                    'lockedout' : lockedout,
+                    'currency' : currency
+                }
+            iterator++;
+        },
+        
+        function(){
+            console.log("in return function for userinfo");
+            console.log(returnUsers)
+            db.close();
+            return returnUsers;
+        }
+        );
+        return returnUsers
+    },
+
+
     printAllUsers: function() {
         //var returnList = [[]]
         var db = new sqlite3.Database('database.db');
@@ -117,6 +163,7 @@ module.exports = {
             return returnList;
         }
         );
+        console.log(":(")
         return returnList
     },
 
@@ -170,7 +217,7 @@ module.exports = {
               return console.error(err.message);
             }
             return row
-              ? returnvar = row.curr
+              ? console.log("row curr="+row.curr)
               : console.log(`No playlist found with the id ${playlistId}`);
           
           },
