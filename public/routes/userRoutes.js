@@ -15,6 +15,7 @@ const initializePassport = require('../libs/passportConfig')
 const userHandler = require('../libs/userHandling')
 const dbfunc = require('../libs/databaseFunctions')
 const profile = require('../libs/profileListeners');
+const { printAllUsers } = require('../libs/databaseFunctions');
 
 app.set('view-engine', 'ejs')
 app.use(express.urlencoded({ extended: false }))
@@ -70,7 +71,8 @@ router.post('/userLogin', checkNotAuthenticated, (req, res, next) => {
 router.post('/userCreation', checkNotAuthenticated, async(req, res) => {
     try {
         const hashedPassword = await bcrypt.hash(req.body.password, 10)
-        addUser(req.body.username, hashedPassword, req.body.email) //implement email into register
+        dbfunc.addUser(req.body.username, hashedPassword, req.body.email) //implement email into register
+        dbfunc.printAllUsers()
         res.redirect('/userRoutes/userLogin')
     } catch {
         res.redirect('/userRoutes/userCreation')
