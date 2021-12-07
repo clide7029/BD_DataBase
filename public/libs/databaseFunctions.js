@@ -1,7 +1,6 @@
 const axios = require('axios');
 const sqlite3 = require('sqlite3').verbose();
 const test = require('./data/test');
-var returnList =[[]]
 module.exports = {
     // addUser: function(username, password, email, currency) {
     //     var db = new sqlite3.Database('database.db');
@@ -85,7 +84,7 @@ module.exports = {
     //     var db = new sqlite3.Database('database.db');
     //     var stmt = db.prepare("DELETE FROM ? WHERE ?");
     //     stmt.run(table, whereatt, wherevar);
-    //     stmt.finalize();
+    //     stmt.finalinoze();
     //     db.close();
     // },
     queryEqual: function(table, whereatt, wherevar) {
@@ -94,6 +93,7 @@ module.exports = {
         let sql = 'SELECT * FROM portfolio'
         var iterator = 0
         db.each(sql,(err,row) => {
+            consoe.log("in db.each");
             if(err) {
                 throw err;
             }
@@ -111,7 +111,14 @@ module.exports = {
                     'mostrecentprice' : mostrecentprice
                 }
             iterator++;
-        });
+        },
+        function(){
+            console.log("in return function");
+            console.log(returnList)
+            db.close();
+            return returnList;
+        }
+        );
         // var stmt = db.prepare("SELECT * FROM ? WHERE ? = ?");
         // var i = 0;   exports
         // stmt.each(table, whereatt, wherevar, function(err, row) {
