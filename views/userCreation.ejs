@@ -1,17 +1,68 @@
-<h1>Sign Up</h1>
-<form action = "/userCreation" method = "POST">
-  <div>
-    <label for = "username">Username</label>
-    <input type = "text" id = "username" name = "username" required>
+<link
+      rel="stylesheet"
+      href="https://bootswatch.com/4/journal/bootstrap.min.css"
+  />
+<body style = "background-color:rgb(41, 173, 74);">
+  <div class="row mt-5">
+    <div class="col-md-6 m-auto">
+      <div class="card card-body">
+        <h1 class="text-center mb-3"><i class="fas fa-sign-in-alt"></i>  Register</h1>
+        <form action="/userRoutes/userCreation" method="POST">
+          <div class="form-group">
+            <label for="username">Username</label>
+            <input
+              type="text"
+              id="username"
+              name="username"
+              class="form-control"
+              placeholder="Enter Username"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              class="form-control"
+              placeholder="Enter Email"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              class="form-control"
+              placeholder="Enter Password"
+              required
+            />
+          </div>
+          <div>
+            <input type="checkbox" onclick="showPassword()"> Show Password
+          </div>
+        <div>
+          <button type="submit" class="btn btn-primary btn-block">Create Account</button>
+        </div>
+        </form>
+        <p class="lead mt-4">
+          Already Have an Account? <a href="/userRoutes/userLogin">Login</a>
+        </p>
+        <script>
+          function showPassword() {
+            var pass = document.getElementById("password")
+            if (pass.type === "password") {
+              pass.type = "text"
+            }
+            else {
+              pass.type = "password"
+            }
+          }
+        </script>
+      </div>
+    </div>
   </div>
-  <div>
-    <label for = "email">Email</label>
-    <input type = "text" id = "email" name = "email" required>
-  </div>
-  <div>
-    <label for = "password">Password</label>
-    <input type = "text" id = "password" name = "password" required>
-  </div>
-  <button type = "submit">Create Account</button>
-</form>
-<a href="/userLogin">Login</a>
+</body>
