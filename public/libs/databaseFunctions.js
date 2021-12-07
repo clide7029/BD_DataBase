@@ -106,9 +106,6 @@ module.exports = {
             email = row.email
             lockedout = row.lockedout
             currency = row.currency
-            console.log(username+"="+row.username)
-            console.log(password+"="+row.password)
-            console.log(email+"="+row.email)
             
             //for (var i = 0; i < 2; i++) {
                 //var emptyStr = ""
@@ -123,8 +120,7 @@ module.exports = {
         },
         
         function(){
-            console.log("in return function for userinfo");
-            console.log(returnUsers)
+
             db.close();
             return returnUsers;
         }
