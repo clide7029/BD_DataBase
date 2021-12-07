@@ -31,22 +31,28 @@
                 </tr>
                 <% for (let i = 0; i < port.length; i++) { %>
                     <tr class="portRow" id=<%=` port${i}` %>>
-                        <% for (let j = 0; j < 4; j++) { %>
-                            <% if(j == 0){ %>
+
+
                                 <td class="ticker">
-                            <%}else {%>
-                                <td>
-                            <% } %>
-                            <% if(j == 3) { %>
-                                <form action="./userProfile" method="POST">
-                                    <button type="submit" id="tickerButton<%=i%>" name="tickerID" value="<%=port[i][0]%>">visualize</button>
-                                </form>
-                            <% }else{ %>
-                                <%= port[i][j] %>
-                            <% } %>
+                                <%= port[i].ticker %>
                                 </td>
-                            <% } %>
-                        </form>
+                                <td class = "price">
+                                <%= port[i].mostrecentprice %>
+                                </td>
+                                <td class = "shares">
+                                <%= port[i].numshares %>
+                                </td>
+                                <td>
+
+
+                                <form action="./userProfile" method="POST">
+                                    <button type="submit" id="tickerButton<%=i%>" name="tickerID" value="<%=port[i].ticker%>">visualize</button>
+                                </form>
+
+
+                                </td>
+
+
                     </tr>
                     <% } %>
             </table>

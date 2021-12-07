@@ -92,7 +92,7 @@ router.post('/userProfile', async function(req, res) {
     let port = dbfunc.queryEqual('portfolio','username','Dumbuser');
 
     console.log(port)
-    res.render("profile.ejs", { port: port , name: req.body.tickerID });
+    res.render("profile.ejs", { port: port});
     // profile.addRowHandlers(Document);
 })
 

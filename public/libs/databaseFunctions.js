@@ -1,6 +1,7 @@
 const axios = require('axios');
 const sqlite3 = require('sqlite3').verbose();
 const test = require('./data/test');
+var returnList =[[]]
 module.exports = {
     // addUser: function(username, password, email, currency) {
     //     var db = new sqlite3.Database('database.db');
@@ -50,11 +51,18 @@ module.exports = {
         // stmt.run(username, ticker, numshares, mostrecentprice);
         // stmt.finalize();
         db.serialize(() => {
-            db.run(`INSERT INTO Portfolio(username,ticker,numshares,mostrecentprice) VALUES ("${username}","${ticker}","${numshares}","${mostrecentprice}")`, (err, row) => {
+            db.run(`INSERT or IGNORE INTO Portfolio(username,ticker,numshares,mostrecentprice) VALUES ("${username}","${ticker}",${numshares},${mostrecentprice})`, (err, row) => {
+                //db.run(`INSERT or IGNORE INTO Portfolio(username,ticker,numshares,mostrecentprice) VALUES ("${username}","${ticker}",${numshares},${mostrecentprice}) UPDATE portfolio SET numshares = ${numshares} WHERE username = "${username}" AND ticker = "${ticker}"`, (err, row) => {
                 if(err){
-                    throw err;
+                throw err;/*
+                    db.run(`UPDATE portfolio SET numshares = ${numshares} WHERE username = "${username}" AND ticker = "${ticker}"`, (err2,row2) =>{
+                        if(err2) {
+                            throw err2;
+                        } 
+                            console.log('updated instead')});
+                    //throw err;*/
                 }
-                console.log(row.username);
+                //console.log(row.username);
             });
         });
         db.close();
@@ -81,15 +89,36 @@ module.exports = {
     //     db.close();
     // },
     queryEqual: function(table, whereatt, wherevar) {
-        var returnList = [];
+        //var returnList = [[]]
         var db = new sqlite3.Database('database.db');
+        let sql = 'SELECT * FROM portfolio'
+        var iterator = 0
+        db.each(sql,(err,row) => {
+            if(err) {
+                throw err;
+            }
+            username = row.username
+            ticker = row.ticker
+            numshares = row.numshares
+            mostrecentprice = row.mostrecentprice
+            
+            //for (var i = 0; i < 2; i++) {
+                //var emptyStr = ""
+                returnList[iterator] = {
+                    'username' : username,
+                    'ticker' : ticker,
+                    'numshares' : numshares,
+                    'mostrecentprice' : mostrecentprice
+                }
+            iterator++;
+        });
         // var stmt = db.prepare("SELECT * FROM ? WHERE ? = ?");
-        // var i = 0;
+        // var i = 0;   exports
         // stmt.each(table, whereatt, wherevar, function(err, row) {
         //     returnList[i] = row;
         //     i++;
         // });
-
+        /*
         db.serialize(() => {
             db.each(`SELECT username FROM User`, (err, row) => {
                 if(err){
@@ -100,10 +129,14 @@ module.exports = {
                 i++;
             });
         });
-
+        */
         // stmt.finalize();
+        //console.log(returnList)
         db.close();
-        return returnList;
+        //console.log(returnList)
+        //return JSON.parse(returnList);
+        //console.log(returnList[0].username);
+        return returnList
     },
     // queryEqual2: function(table, attribute, whereatt, wherevar, whereatt2, whereval2) {
     //     var returnList = [];
