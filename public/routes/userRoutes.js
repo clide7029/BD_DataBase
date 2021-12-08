@@ -8,12 +8,10 @@ const bcrypt = require('bcrypt')
 const dbfunc = require('../libs/databaseFunctions')
 
 router.get('/2', (req, res) => {
-    console.log("home authenticated?: " + checkAuthenticated(req))
     res.render('home.ejs', {loggedIn: checkAuthenticated(req)}) //if we want to display username on homepage
 })
 router.get('/userLogin', (req, res) => {
-    console.log("login authenticated?: " + checkAuthenticated(req))
-    if(!checkAuthenticated(req)) {
+    if((!checkAuthenticated(req)) || typeof(checkAuthenticated(req)) === 'undefined') {
         res.render('userLogin.ejs')
     }
     else {
@@ -22,7 +20,7 @@ router.get('/userLogin', (req, res) => {
 })
 
 router.get('/userCreation', (req, res) => {
-    if(!checkAuthenticated(req)) {
+    if(!checkAuthenticated(req) || typeof(checkAuthenticated(req)) === 'undefined') {
         res.render('userCreation.ejs')
     }
     else {
@@ -41,8 +39,7 @@ router.post('/userLogin', (req, res, next) => {
 router.post('/userCreation', async(req, res) => {
     try {
         //check username not taken
-        var user = dbfunc.getUserInfo(req.body.username)
-        console.log(typeof(user));
+        var user = await dbfunc.getUserInfo(req.body.username)
         if(typeof(user) === 'undefined') {
             console.log("create new user")
             const hashedPassword = await bcrypt.hash(req.body.password, 10)
@@ -100,7 +97,6 @@ router.post('/userProfile/candlestickGraph', async function(req,res) {
 
 
 function checkAuthenticated(req) {
-    console.log("in check not authenticated: " + typeof(req.user))
     if (typeof(req.user) === "undefined") {
         return false
     }
