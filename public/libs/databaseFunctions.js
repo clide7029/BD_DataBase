@@ -3,6 +3,7 @@ const sqlite3 = require('sqlite3').verbose();
 const test = require('./data/test');
 var returnList =[[]]
 var returnUsers=[[]]
+var returnStockPrices =[[]]
 module.exports = {
 
     addPortfolio: function(username, ticker, numshares, mostrecentprice) {
@@ -37,6 +38,29 @@ module.exports = {
         let currency=1000;
         db.serialize(() => {
             db.run(`INSERT or IGNORE INTO User(username,password,email,lockedout,currency) VALUES ("${username}","${password}","${email}",${lockedout},${currency})`, (err, row) => {
+                //db.run(`INSERT or IGNORE INTO Portfolio(username,ticker,numshares,mostrecentprice) VALUES ("${username}","${ticker}",${numshares},${mostrecentprice}) UPDATE portfolio SET numshares = ${numshares} WHERE username = "${username}" AND ticker = "${ticker}"`, (err, row) => {
+                if(err){
+                throw err;/*
+                    db.run(`UPDATE portfolio SET numshares = ${numshares} WHERE username = "${username}" AND ticker = "${ticker}"`, (err2,row2) =>{
+                        if(err2) {
+                            throw err2;
+                        } 
+                            console.log('updated instead')});
+                    //throw err;*/
+                }
+                //console.log(row.username);
+            });
+        });
+        db.close();
+    },
+    addPricing: function(ticker, day, openPrice, closePrice, highPrice,lowPrice) {
+        console.log("enter add to pricing");
+        var db = new sqlite3.Database('database.db');
+        // var stmt = db.prepare("INSERT INTO Portfolio VALUES ( ? , ? , ? , ? )");
+        // stmt.run(username, ticker, numshares, mostrecentprice);
+        // stmt.finalize();
+        db.serialize(() => {
+            db.run(`INSERT or IGNORE INTO Pricing(ticker,day,openPrice,closePrice,highPrice,lowPrice) VALUES ("${ticker}","${day}","${openPrice}",${closePrice},${highPrice},${lowPrice})`, (err, row) => {
                 //db.run(`INSERT or IGNORE INTO Portfolio(username,ticker,numshares,mostrecentprice) VALUES ("${username}","${ticker}",${numshares},${mostrecentprice}) UPDATE portfolio SET numshares = ${numshares} WHERE username = "${username}" AND ticker = "${ticker}"`, (err, row) => {
                 if(err){
                 throw err;/*
@@ -187,11 +211,11 @@ module.exports = {
         }
 
     },
-    updateUserCurr(username,cost){
+    updateUserCurr(username,change){
         var db = new sqlite3.Database('database.db');
         let sql=`UPDATE User set currency = ? WHERE username = ?`
-        let currentcurrency=this.getUserCurr(username);
-        let newcurrency=currentcurrency-cost;
+        let currentcurrency=this.getUserInfo(username)[0].currency;
+        let newcurrency=currentcurrency+change;
         console.log("new currency = "+newcurrency)
         let data = [newcurrency,username]
 
@@ -204,27 +228,93 @@ module.exports = {
           
           });
     },
-    getUserCurr(username){
-        let returnvar ="";
+    getPortfolioInfo: function(username,ticker){
+        console.log("into getUserInfo");
+        //var returnList = [[]]
         var db = new sqlite3.Database('database.db');
-        let sql = `SELECT currency curr FROM user WHERE username = ?`
-        db.get(sql,[username],(err, row) => {
+        let sql = `SELECT * FROM Portfolio where username = (?) and ticker = (?)`
+        var iterator = 0
+        db.each(sql,[username,ticker],(err,row) => {
+            console.log("in db.each")
+            //console.log("in db.each");
+            if(err) {
+                throw err;
+            }
+            ticker = row.ticker
+            username = row.username
+            numshares = row.numshares
+            
+            //for (var i = 0; i < 2; i++) {
+                //var emptyStr = ""
+                returnUsers[iterator] = {
+                    'username' : username,
+                    'ticker' : ticker,
+                    'numshares' : numshares,
+                }
+            iterator++;
+        },
+        
+        function(){
+
+            db.close();
+            return returnUsers;
+        }
+        );
+        return returnUsers
+    },
+    updatePortfolioAmount: function(ticker,username,amount){
+        var db = new sqlite3.Database('database.db');
+        let sql=`UPDATE portfolio set numshares = ? WHERE username = ? AND ticker = ?`
+        let currentshares=this.getPortfolioInfo(username,ticker)[0].numshares;
+        let newshares=currentshares+amount;
+        console.log("new currency = "+newshares)
+        let data = [newshares,username,ticker]
+
+        db.run(sql, data, function(err) {
             if (err) {
               return console.error(err.message);
             }
-            return row
-              ? console.log("row curr="+row.curr)
-              : console.log(`No playlist found with the id ${playlistId}`);
+            console.log(`Row(s) updated: ${this.changes}`);
+            
           
-          },
-          function(){
-            console.log("in return function");
-            console.log(returnvar)
+          });
+    },
+    getStocksSince: function(ticker, day) {
+        //var returnList = [[]]
+        var db = new sqlite3.Database('database.db');
+        let sql = `SELECT openprice, closeprice, highprice, lowprice, day FROM Pricing where day > ? and ticker = ? ORDER BY DATE`
+        let data = [day,ticker]
+        var iterator = 0
+        db.each(sql,data,(err,row) => {
+            //console.log("in db.each");
+            if(err) {
+                throw err;
+            }
+            highPrice = row.highprice
+            lowPrice = row.lowprice
+            openPrice = row.openprice
+            closePrice = row.closePrice
+            day = row.day
+            
+            //for (var i = 0; i < 2; i++) {
+                //var emptyStr = ""
+                returnStockPrices[iterator] = {
+                    'highPrice' : highPrice,
+                    'lowPrice' : lowPrice,
+                    'openPrice' : openPrice,
+                    'closePrice' : closePrice,
+                    'day' : day
+                }
+            iterator++;
+        },
+        
+        function(){
+            console.log("in return function for pricing");
+            console.log(returnList)
             db.close();
-            console.log("return var ="+ returnvar);
-            return returnvar;
+            return returnStockPrices;
         }
-          );
+        );
+        return returnStockPrices
     }
-
 };
