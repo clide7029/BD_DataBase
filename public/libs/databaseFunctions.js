@@ -124,15 +124,15 @@ module.exports = {
                     console.log(err)
                     reject(err)
                 }
-                //console.log(row)
                 resolve(row)
-            })
-        
+                console.log("row: " + row)
+            }) 
         }).then(row => {
             userInfo = row
-            console.log(typeof(userInfo));
+            console.log("database function return type: " + typeof(userInfo));
 
         })
+        console.log("type of return userInfo: " + typeof(userInfo))
         return userInfo;
     },
 

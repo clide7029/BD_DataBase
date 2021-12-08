@@ -31,8 +31,8 @@ app.use(flash())
 
 var routes = require('./public/routes/r');
 
-// var builder = require('./public/libs/buildtable');
-// builder.createDatabase();
+//var builder = require('./public/libs/buildtable');
+//builder.createDatabase();
 
 
 app.set("view engine", "ejs");
