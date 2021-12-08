@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<style>
+		body{background: skyblue;}
+	</style>
+    <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+</head>
+	<body>
+		<form action="./candlestickGraphUpdated" method="POST">
+			<label>Stock Ticker to View: </label>
+			<input type="text" name = "CurrentStock" id="CurrentStock">
+			<input type="submit">
+		</form>
+        <div id="chartContainer" style="height: 300px; width: 100%;"></div>
+        <script type="text/javascript">
+            var chart = new CanvasJS.Chart("chartContainer",
+    {
+        title:{
+            text: "Basic Candle Stick Chart"
+        },
+        zoomEnabled: true,
+        axisY: {    
+            includeZero:false,
+            title: "Prices",
+            prefix: "$ "
+        },
+        axisX: {
+            interval:1,
+            valueFormatString: "MMM",
+            labelAngle: -45
+        },
+        data:[
+        {
+            type: "candlestick",
+            dataPoints: [<%-candleStickPrices%>] 
+        }
+    ]});
+            chart.render();
+    </script>
+</body>
+</html>
