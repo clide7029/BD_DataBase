@@ -6,7 +6,7 @@ function initialize(passport, getUsername, getUserByEmail) {
     const authenticateUser = async (getUsername, password, done) => {
         const user = await dbfunc.getUserInfo(getUsername)
         //console.log("user: " + user.username)
-        if (typeof(user) === undefined) {
+        if (typeof(user) === 'undefined') {
             return done(null, false, {message: 'No user with that name'})
         }
         try {

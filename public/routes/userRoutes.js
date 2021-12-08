@@ -5,11 +5,7 @@ var router = express.Router();
 
 const bcrypt = require('bcrypt')
 
-const userHandler = require('../libs/userHandling')
 const dbfunc = require('../libs/databaseFunctions')
-const profile = require('../libs/profileListeners');
-const { printAllUsers } = require('../libs/databaseFunctions');
-var loggedIn = false;
 
 router.get('/2', (req, res) => {
     console.log("home authenticated?: " + checkAuthenticated(req))
@@ -46,7 +42,9 @@ router.post('/userCreation', async(req, res) => {
     try {
         //check username not taken
         var user = dbfunc.getUserInfo(req.body.username)
-        if(user === undefined) {
+        console.log(typeof(user));
+        if(typeof(user) === 'undefined') {
+            console.log("create new user")
             const hashedPassword = await bcrypt.hash(req.body.password, 10)
             dbfunc.addUser(req.body.username, hashedPassword, req.body.email) //implement email into register
             res.redirect('/userRoutes/userLogin')

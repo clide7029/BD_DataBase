@@ -113,45 +113,28 @@ module.exports = {
         return returnList
     },
     
-    getUserInfo: function(user) {
-        console.log("into getUserInfo");
+    getUserInfo: async function(user) {
         //var returnList = [[]]
         var db = new sqlite3.Database('database.db');
-        let sql = `SELECT * FROM User where username = (?)`
-        var iterator = 0
-        db.each(sql,[user],(err,row) => {
-            console.log("in db.each")
-            //console.log("in db.each");
-            if(err) {
-                throw err;
-            }
-            username = row.username
-            password = row.password
-            email = row.email
-            lockedout = row.lockedout
-            currency = row.currency
-            
-            //for (var i = 0; i < 2; i++) {
-                //var emptyStr = ""
-                returnUsers[iterator] = {
-                    'username' : username,
-                    'password' : password,
-                    'email' : email,
-                    'lockedout' : lockedout,
-                    'currency' : currency
+        let sql = `SELECT * FROM User WHERE username = ` + "'" + user + "'"
+        var userInfo;
+        const row = await new Promise((resolve,reject) => {
+            db.get(sql, [], (err, row) => {
+                if (err) {
+                    console.log(err)
+                    reject(err)
                 }
-            iterator++;
-        },
+                //console.log(row)
+                resolve(row)
+            })
         
-        function(){
+        }).then(row => {
+            userInfo = row
+            console.log(typeof(userInfo));
 
-            db.close();
-            return returnUsers;
-        }
-        );
-        return returnUsers
+        })
+        return userInfo;
     },
-
 
     printAllUsers: function() {
         //var returnList = [[]]
