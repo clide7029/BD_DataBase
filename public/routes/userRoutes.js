@@ -1,79 +1,59 @@
-var express = require('express'),
-    router = express.Router();
 
-if (process.env.NODE_ENV !== 'production') {
-    require('dotenv').config()
-}
-const app = express()
-const bcrypt = require('bcrypt')
+const express = require('express')
 const passport = require('passport')
-const flash = require('express-flash')
-const session = require('express-session')
-const methodOverride = require('method-override')
+var router = express.Router();
 
-const initializePassport = require('../libs/passportConfig')
+const bcrypt = require('bcrypt')
+
 const userHandler = require('../libs/userHandling')
 const dbfunc = require('../libs/databaseFunctions')
 const profile = require('../libs/profileListeners');
 const { printAllUsers } = require('../libs/databaseFunctions');
+var loggedIn = false;
 
-app.set('view-engine', 'ejs')
-app.use(express.urlencoded({ extended: false }))
-app.use('/css/loginPage.css', express.static('/public'))
-
-var tempName
-var tempPass
-app.get('/userLogin', (req,res) => {
-    tempName = req.body.username
-    tempPass = req.body.password
+router.get('/2', (req, res) => {
+    console.log("home authenticated?: " + checkAuthenticated(req))
+    res.render('home.ejs', {loggedIn: checkAuthenticated(req)}) //if we want to display username on homepage
 })
-initializePassport(passport, tempName, tempPass) //Select from table instead of users remove id make sure username is unique
-
-app.use(flash())
-app.use(session({
-    secret: process.env.SESSION_SECRET,
-    resave: false, //true,
-    saveUninitialized: false //true
-}))
-
-app.use(passport.initialize())
-app.use(passport.session())
-app.use(methodOverride('_method'))
-
-
-// const u = dbfunc.queryEqual('User', 'username', 'username', user.username);
-// const e = dbfunc.queryEqual('User', 'email', 'email', user.email);
-// initializePassport(passport, u, e) //Select from table instead of users remove id make sure username is unique
-
-// router.get('/', function(req, res, next) {
-//     res.redirect('/userLogin');
-// });
-
-
-router.get('/', checkAuthenticated, (req, res) => {
-    res.render('home.ejs', { name: req.user.username }) //if we want to display username on homepage
-})
-router.get('/userLogin', checkNotAuthenticated, (req, res) => {
-    res.render('userLogin.ejs')
+router.get('/userLogin', (req, res) => {
+    console.log("login authenticated?: " + checkAuthenticated(req))
+    if(!checkAuthenticated(req)) {
+        res.render('userLogin.ejs')
+    }
+    else {
+        res.redirect('/userRoutes/2')
+    }
 })
 
-router.get('/userCreation', checkNotAuthenticated, (req, res) => {
-    res.render('userCreation.ejs')
+router.get('/userCreation', (req, res) => {
+    if(!checkAuthenticated(req)) {
+        res.render('userCreation.ejs')
+    }
+    else {
+        res.redirect('/userRoutes/2')
+    }
 })
 
-router.post('/userLogin', checkNotAuthenticated, (req, res, next) => {
+router.post('/userLogin', (req, res, next) => {
     passport.authenticate('local', {
-    successRedirect: '/r/home',
+    successRedirect: '/userRoutes/2',
     failureRedirect: '/userRoutes/userLogin',
     failureFlash: true
 })(req, res, next)
 })
-router.post('/userCreation', checkNotAuthenticated, async(req, res) => {
+
+router.post('/userCreation', async(req, res) => {
     try {
-        const hashedPassword = await bcrypt.hash(req.body.password, 10)
-        dbfunc.addUser(req.body.username, hashedPassword, req.body.email) //implement email into register
-        dbfunc.printAllUsers()
-        res.redirect('/userRoutes/userLogin')
+        //check username not taken
+        var user = dbfunc.getUserInfo(req.body.username)
+        if(user === undefined) {
+            const hashedPassword = await bcrypt.hash(req.body.password, 10)
+            dbfunc.addUser(req.body.username, hashedPassword, req.body.email) //implement email into register
+            res.redirect('/userRoutes/userLogin')
+        }
+        else {
+            res.redirect('/userRoutes/userCreation')
+        }
     } catch {
         res.redirect('/userRoutes/userCreation')
     }
@@ -108,19 +88,14 @@ router.post('/userProfile', async function(req, res) {
     res.render("profile.ejs", { port: port});
 })
 
-function checkAuthenticated(req, res, next) {
-    if (req.user != null) {
-        return next()
+function checkAuthenticated(req) {
+    console.log("in check not authenticated: " + typeof(req.user))
+    if (typeof(req.user) === "undefined") {
+        return false
     }
-
-    res.redirect('/userRoutes/userLogin')
-}
-
-function checkNotAuthenticated(req, res, next) {
-    if (req.user === null) {
-        return res.redirect('/')
+    else {
+        return true
     }
-    next()
 }
 
 module.exports = router;

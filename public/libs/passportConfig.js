@@ -1,16 +1,17 @@
 const LocalStrategy = require('passport-local').Strategy
 const bcrypt = require('bcrypt')
+const dbfunc = require("../libs/databaseFunctions")
 
 function initialize(passport, getUsername, getUserByEmail) {
     const authenticateUser = async (getUsername, password, done) => {
-        const user = queryEqual('User','username', getUsername)
-        if (user == []) {
+        const user = await dbfunc.getUserInfo(getUsername)
+        //console.log("user: " + user.username)
+        if (typeof(user) === undefined) {
             return done(null, false, {message: 'No user with that name'})
         }
-
         try {
-            if (await bcrypt.compare(password, user[1])) {
-                return done(null, user)
+            if (bcrypt.compare(password, user.password)) {
+                return done(null, user.username)
             } 
             else {
                 return done(null, false, {message: 'Password incorrect'})
@@ -21,9 +22,9 @@ function initialize(passport, getUsername, getUserByEmail) {
         }
     }
     passport.use(new LocalStrategy({usernameField: 'username'}, authenticateUser))
-    passport.serializeUser((user,done) => done(null, user.email))
-    passport.deserializeUser((email,done) => {
-        return done(null, getUserByEmail(email))
+    passport.serializeUser((user,done) => done(null, user[0]))
+    passport.deserializeUser((user,done) => {
+        return done(null, user[0])
     })
 }
 

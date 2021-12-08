@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="/css/main.css" />
     <title>Stock App</title>
 </head>
-
+<%console.log(typeof(loggedin))%>
 <body>
 
     <div class="header">
@@ -20,11 +20,11 @@
             <form action="/userRoutes/userProfile" method="GET">
                 <button type="submit" >Profile</button>
             </form>
-            <% if(logAction == "Auth"){ %> 
+            <% if((typeof(loggedIn) !== "undefined") && loggedIn === true){ %> 
                 <form action="/userRoutes/logout?_method=DELETE" method="POST">
                     <button type="submit">Logout</button>
                 </form>
-            <% } else if(logAction == "notAuth") { %>
+            <% } else { %>
                 <form action="/userRoutes/userCreation" method="GET">
                     <button type="submit">Register</button>
                 </form>

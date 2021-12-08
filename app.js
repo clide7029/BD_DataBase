@@ -5,10 +5,29 @@ const hostname = "127.0.0.1";
 const port = 8000 //http = 80, ssh = 22
 const express = require("express");
 const bodyParser = require("body-parser")
+const session = require('express-session')
+const passport = require('passport')
+const methodOverride = require('method-override')
+const flash = require('express-flash')
 const app = express();
+
+require('./public/libs/passportConfig')(passport)
 
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }))
+app.use('/css/loginPage.css', express.static('/public'))
+
+app.use(session({
+    secret: "randomSecret",
+    resave: false, //true,
+    saveUninitialized: false //true
+}))
+
+app.use(passport.initialize())
+app.use(passport.session())
+app.use(methodOverride('_method'))
+app.use(flash())
+
 
 var routes = require('./public/routes/r');
 
