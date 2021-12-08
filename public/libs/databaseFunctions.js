@@ -15,13 +15,13 @@ module.exports = {
             db.run(`INSERT or IGNORE INTO Portfolio(username,ticker,numshares,mostrecentprice) VALUES ("${username}","${ticker}",${numshares},${mostrecentprice})`, (err, row) => {
                 //db.run(`INSERT or IGNORE INTO Portfolio(username,ticker,numshares,mostrecentprice) VALUES ("${username}","${ticker}",${numshares},${mostrecentprice}) UPDATE portfolio SET numshares = ${numshares} WHERE username = "${username}" AND ticker = "${ticker}"`, (err, row) => {
                 if(err){
-                // throw err;
+                    throw err;
                 
-                    db.run(`UPDATE portfolio SET numshares = ${numshares} WHERE username = "${username}" AND ticker = "${ticker}"`, (err2,row2) =>{
-                        if(err2) {
-                            throw err2;
-                        } 
-                            console.log('updated instead')});
+                    // db.run(`UPDATE portfolio SET numshares = ${numshares} WHERE username = "${username}" AND ticker = "${ticker}"`, (err2,row2) =>{
+                    //     if(err2) {
+                    //         throw err2;
+                    //     } 
+                    //         console.log('updated instead')});
                     //throw err;
                 }
                 //console.log(row.username);

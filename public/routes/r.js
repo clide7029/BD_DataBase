@@ -8,7 +8,7 @@ var userRoutes = require('./userRoutes');
 router
     .get('/', function(req, res) {
         console.log("r.js home function")
-        res.render("home.ejs")
+        res.render("home.ejs", {loggedIn: checkAuthenticated(req)})
     })
 
     // .post('/', function(req, res) {
@@ -27,7 +27,7 @@ router
         let obj = await myMod.generateChart(req.body.CurrentStock, req.body.range);
         //console.log(obj);
         //chart = myMod.makeChart(obj);
-        res.render('candlestickGraph.ejs',{profile: false, candleStickPrices: obj, CurrentStock: req.body.CurrentStock, IntervalChosen : IntervalChosen,IntervalDates : IntervalDates});
+        res.render('home.ejs',{profile: false, loggedIn: checkAuthenticated(req), candleStickPrices: obj, CurrentStock: req.body.CurrentStock, IntervalChosen : IntervalChosen,IntervalDates : IntervalDates});
     
     })
     // app.get('/',function(req,res) {
@@ -38,6 +38,15 @@ router
 
 function searchFunc(req, res){
     res.render("profile.ejs")
+}
+
+checkAuthenticated = function(req) {
+    if (typeof(req.user) === "undefined") {
+        return false
+    }
+    else {
+        return true
+    }
 }
 
 

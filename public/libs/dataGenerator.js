@@ -15,11 +15,13 @@ async function stockCandles(symbol, resolution, from, to) {
 }
 module.exports.IntervalChosen = ""
 module.exports.IntervalDates = ""
+module.exports.ChosenStock = ""
 //var finnHubData = []
 module.exports.generateChart =  async function(CurrentStock, chosenInterval = '1y') {
     //console.log("In Generate Chart")
     //tmp = await stockCandles('AAPL','M',1607241875,1638777875)
     var finnHubData = []  
+    var ChosenStock = CurrentStock;
     var currentTs = new Date();
     var currentTsSeconds = Math.floor(currentTs.valueOf()/ 1000)
     var pastTs = new Date(currentTs.getTime() - (31556926 * 1000))

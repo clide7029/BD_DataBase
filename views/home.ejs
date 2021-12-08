@@ -14,6 +14,8 @@
          <% if (s = (typeof(stock) !== 'undefined')) { %>
          <%= s %> 
         <% } %>
+        <% if (isAuth = (typeof(username) !== 'undefined')) { %>
+           <% } %>
 
        
         <form class="search" action="/candlestickGraph" method="POST">
@@ -23,7 +25,7 @@
         <br>
 
         <% if(typeof(candleStickPrices) !== 'undefined') { %>
-            <%-include('candlestickGraph', {profile: false, candleStickPrices: obj, CurrentStock: CurrentStock, IntervalChosen : IntervalChosen,IntervalDates : IntervalDates}) %>
+            <%-include('candlestickGraph', {profile: false, candleStickPrices: candleStickPrices, CurrentStock: CurrentStock, IntervalChosen : IntervalChosen,IntervalDates : IntervalDates}) %>
         <% } %>
 
             

@@ -16,6 +16,7 @@ require('./public/libs/passportConfig')(passport)
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use('/css/loginPage.css', express.static('/public'))
+app.locals.isAuth = false;
 
 app.use(session({
     secret: "randomSecret",

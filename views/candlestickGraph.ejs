@@ -1,15 +1,8 @@
-<%-include('header.ejs',{ home: "Home", nav: "Profile", logAction: "notAuth"})%>
 
 <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 
 
 <div class="content">
-
-<form class="search" action="candlestickGraph" method="POST">
-    <input type="search" placeholder="Search..." name="CurrentStock">
-    <input type="submit" value=&#x2315>
-</form>
-<br>
 
 <form class="timeRange" action="candlestickGraph" method="POST">
     <input type="hidden" value="<%=CurrentStock%>" name="CurrentStock">
@@ -32,7 +25,7 @@
 var chart = new CanvasJS.Chart("chartContainer",
 {
     title:{
-    text: "Basic Candle Stick Chart"
+    text: '<%- CurrentStock %>'
 },
     zoomEnabled: true,
     axisY: {    
@@ -54,4 +47,3 @@ var chart = new CanvasJS.Chart("chartContainer",
 ]});
 chart.render();
 </script>
-<%-include('footer.ejs')%>
