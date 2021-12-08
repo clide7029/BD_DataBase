@@ -85,10 +85,11 @@ router.delete('/logout', (req, res) => {
 })
 
 
-router.get('/userProfile', (req, res) => {
-    res.render("profile.ejs", { port: [["this was a get req"]] });
-    // profile.addRowHandlers(Document);
-})
+// router.get('/userProfile', (req, res) => {
+//     // res.render("profile.ejs", { port: [["this was a get req"]] });
+//     res.redirect(307, './userProfile');
+//     // profile.addRowHandlers(Document);
+// })
 
 router.post('/userProfile', async function(req, res) {
     // let mostrecentprice = dbfunc.currentStockPrice(req.body.tickerID)

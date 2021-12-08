@@ -16,29 +16,13 @@
         <% } %>
 
        
-        <form class="search" action="/" method="POST">
-            <input type="search" placeholder="Search..." name="stock">
+        <form class="search" action="/candlestickGraph" method="POST">
+            <input type="search" placeholder="Search..." name="CurrentStock">
             <input type="submit" value=&#x2315>
         </form>
         <br>
 
-        <% if(s){ %>
-            <form class="timeRange" action="/" method="POST">
-                <input type="hidden" value="<%=stock%>" name="stock">
-                <button type="submit" id="1d" value="1d" name="range">1d</button>
-                <button type="submit" id="3d" value="3d" name="range">3d</button>
-                <button type="submit" id="5d" value="5d" name="range">5d</button>
-                <button type="submit" id="1w" value="1w" name="range">1w</button>
-                <button type="submit" id="2w" value="2w" name="range">2w</button>
-                <button type="submit" id="1m" value="1m" name="range">1m</button>
-                <button type="submit" id="3m" value="3m" name="range">3m</button>
-                <button type="submit" id="6m" value="6m" name="range">6m</button>
-                <button type="submit" id="1y" value="1y" name="range">1y</button>
-            </form>
-            <br>
-            <canvas id="stockGraph"></canvas>
-        <% } %>
-    </div>
+            
 
     <script src="app.js"></script>
 

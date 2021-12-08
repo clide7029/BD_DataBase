@@ -38,6 +38,9 @@ body {
 .content {
   top: 200px;
   bottom: 50px;
+  position: absolute;
+  margin: auto;
+  /* padding: 50px; */
 }
 
 .navbar button {
@@ -56,12 +59,6 @@ h1 {
 
 .formInput {
   padding: 15px;
-}
-
-.content {
-  position: absolute;
-  margin: auto;
-  padding: 50px;
 }
 
 #searchStock {
