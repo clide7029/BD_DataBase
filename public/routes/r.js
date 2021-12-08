@@ -5,6 +5,7 @@ var userRoutes = require('./userRoutes');
 
 router
     .get('/', function(req, res) {
+        console.log("r.js home function")
         res.render("home.ejs")
     })
 
