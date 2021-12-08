@@ -77,7 +77,7 @@ router.post('/userProfile', async function(req, res) {
     console.log(`price = ${ mostrecentprice }`);
     if(typeof(req.body.tickerID) !== 'undefined') {
         console.log("adding portfolio");
-        dbfunc.addPortfolio("Dumbuser",req.body.tickerID, req.body.shares,mostrecentprice);
+        // dbfunc.addPortfolio("Dumbuser",req.body.tickerID, req.body.shares,mostrecentprice);
         console.log("portfolio added");
     }
     let port = dbfunc.queryEqual('portfolio','username','Dumbuser');
@@ -85,6 +85,19 @@ router.post('/userProfile', async function(req, res) {
     console.log(port)
     res.render("profile.ejs", { port: port});
 })
+
+router.post('/userProfile/candlestickGraph', async function(req,res) {
+
+    //console.log('here')
+    //console.log(req.protocol + "://" + req.get('host') + req.originalUrl);
+    console.log(req.body.CurrentStock);
+    let obj = await myMod.generateChart(req.body.CurrentStock, req.body.range);
+    console.log(req.body.CurrentStock);
+    //chart = myMod.makeChart(obj);
+    res.render('profile.ejs',{profile: true, candleStickPrices: obj, CurrentStock: req.body.CurrentStock, IntervalChosen : IntervalChosen,IntervalDates : IntervalDates});
+
+})
+
 
 function checkAuthenticated(req) {
     console.log("in check not authenticated: " + typeof(req.user))

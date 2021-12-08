@@ -22,6 +22,10 @@
         </form>
         <br>
 
+        <% if(typeof(candleStickPrices) !== 'undefined') { %>
+            <%-include('candlestickGraph', {profile: false, candleStickPrices: obj, CurrentStock: CurrentStock, IntervalChosen : IntervalChosen,IntervalDates : IntervalDates}) %>
+        <% } %>
+
             
 
     <script src="app.js"></script>

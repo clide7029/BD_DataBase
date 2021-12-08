@@ -21,7 +21,7 @@
                 <input type="submit" id="sellbtn" value="SELL">
             </form>
         </div>
-
+        
         <div class="portfolio-container">
             <table id="portfolio">
                 <tr>
@@ -31,8 +31,8 @@
                 </tr>
                 <% for (let i = 0; i < port.length; i++) { %>
                     <tr class="portRow" id=<%=` port${i}` %>>
-
-
+        
+        
                                 <td class="ticker">
                                 <%= port[i].ticker %>
                                 </td>
@@ -43,20 +43,24 @@
                                 <%= port[i].numshares %>
                                 </td>
                                 <td>
-
-
+        
+        
                                 <form action="./userProfile" method="POST">
-                                    <button type="submit" id="tickerButton<%=i%>" name="tickerID" value="<%=port[i].ticker%>">visualize</button>
+                                    <button type="submit" id="tickerButton<%=i%>" name="CurrentStock" value="<%=port[i].ticker%>">visualize</button>
                                 </form>
-
-
+        
+        
                                 </td>
-
-
+        
+        
                     </tr>
                     <% } %>
             </table>
         </div>
+
+        <% if(typeof(candleStickPrices) !== 'undefined') { %>
+            <%-include('candlestickGraph', {profile: false, candleStickPrices: obj, CurrentStock: CurrentStock, IntervalChosen : IntervalChosen,IntervalDates : IntervalDates}) %>
+        <% } %>
 
 
 

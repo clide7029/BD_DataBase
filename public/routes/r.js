@@ -27,7 +27,7 @@ router
         let obj = await myMod.generateChart(req.body.CurrentStock, req.body.range);
         //console.log(obj);
         //chart = myMod.makeChart(obj);
-        res.render('candlestickGraph.ejs',{candleStickPrices: obj, CurrentStock: req.body.CurrentStock, IntervalChosen : IntervalChosen,IntervalDates : IntervalDates});
+        res.render('candlestickGraph.ejs',{profile: false, candleStickPrices: obj, CurrentStock: req.body.CurrentStock, IntervalChosen : IntervalChosen,IntervalDates : IntervalDates});
     
     })
     // app.get('/',function(req,res) {

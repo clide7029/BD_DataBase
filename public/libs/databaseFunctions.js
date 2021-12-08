@@ -15,13 +15,14 @@ module.exports = {
             db.run(`INSERT or IGNORE INTO Portfolio(username,ticker,numshares,mostrecentprice) VALUES ("${username}","${ticker}",${numshares},${mostrecentprice})`, (err, row) => {
                 //db.run(`INSERT or IGNORE INTO Portfolio(username,ticker,numshares,mostrecentprice) VALUES ("${username}","${ticker}",${numshares},${mostrecentprice}) UPDATE portfolio SET numshares = ${numshares} WHERE username = "${username}" AND ticker = "${ticker}"`, (err, row) => {
                 if(err){
-                throw err;/*
+                // throw err;
+                
                     db.run(`UPDATE portfolio SET numshares = ${numshares} WHERE username = "${username}" AND ticker = "${ticker}"`, (err2,row2) =>{
                         if(err2) {
                             throw err2;
                         } 
                             console.log('updated instead')});
-                    //throw err;*/
+                    //throw err;
                 }
                 //console.log(row.username);
             });
@@ -226,6 +227,7 @@ module.exports = {
             ticker = row.ticker
             username = row.username
             numshares = row.numshares
+            mostrecentprice = row.mostrecentprice
             
             //for (var i = 0; i < 2; i++) {
                 //var emptyStr = ""
@@ -233,6 +235,7 @@ module.exports = {
                     'username' : username,
                     'ticker' : ticker,
                     'numshares' : numshares,
+                    'mostrecentprice': mostrecentprice
                 }
             iterator++;
         },
