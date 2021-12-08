@@ -1,4 +1,9 @@
-<%- include("header.ejs", { home: "Home", nav: "Profile", logAction: "notAuth"}) %>
+<% if(isAuth = (typeof(username) !== 'undefined')) { %>
+    <%- include("header.ejs", { loggedIn: isAuth, username: username } ) %>
+<% } else { %>
+    <%- include("header.ejs", { loggedIn: isAuth } ) %>
+    <% } %>
+
 
     <div class="content">
         <div class="hero">
@@ -9,13 +14,10 @@
 
 
         <% if (r = (typeof(range) !== 'undefined')) { %>
-            <%= range %>
-        <% } %>
-         <% if (s = (typeof(stock) !== 'undefined')) { %>
-         <%= s %> 
-        <% } %>
-        <% if (isAuth = (typeof(username) !== 'undefined')) { %>
-           <% } %>
+            <% } %>
+             <% if (s = (typeof(stock) !== 'undefined')) { %>
+            <% } %>
+        
 
        
         <form class="search" action="/candlestickGraph" method="POST">
@@ -25,7 +27,7 @@
         <br>
 
         <% if(typeof(candleStickPrices) !== 'undefined') { %>
-            <%-include('candlestickGraph', {profile: false, candleStickPrices: candleStickPrices, CurrentStock: CurrentStock, IntervalChosen : IntervalChosen,IntervalDates : IntervalDates}) %>
+            <%- include('candlestickGraph', {profile: false, candleStickPrices: candleStickPrices, CurrentStock: CurrentStock, IntervalChosen : IntervalChosen,IntervalDates : IntervalDates}) %>
         <% } %>
 
             

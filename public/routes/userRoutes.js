@@ -9,7 +9,7 @@ const dbfunc = require('../libs/databaseFunctions')
 const myMod = require('../libs/dataGenerator')
 
 router.get('/2', (req, res) => {
-    res.render('home.ejs', {loggedIn: checkAuthenticated(req)}) //if we want to display username on homepage
+    res.render('home.ejs', {loggedIn: checkAuthenticated(req), username: req.user}) //if we want to display username on homepage
 })
 router.get('/userLogin', (req, res) => {
     if((!checkAuthenticated(req)) || typeof(checkAuthenticated(req)) === 'undefined') {
@@ -80,13 +80,14 @@ router.post('/userProfile', async function(req, res) {
     console.log(`price = ${ mostrecentprice }`);
     if(typeof(req.body.CurrentStock) !== 'undefined') {
         console.log("adding portfolio");
-        dbfunc.addPortfolio("Dumbuser",req.body.CurrentStock, req.body.shares,mostrecentprice);
+        dbfunc.addPortfolio(req.user,req.body.CurrentStock, req.body.shares,mostrecentprice);
         console.log("portfolio added");
     }
-    let port = dbfunc.queryEqual('portfolio','username',"Dumbuser");
+    console.log("getting portfolio for " + req.user);
+    let port = dbfunc.queryEqual('Portfolio','username',req.user);
 
     console.log(port)
-    res.render("profile.ejs", { port: port, loggedIn: true});
+    res.render("profile.ejs", { port: port, loggedIn: checkAuthenticated(req), username: req.user});
 })
 
 router.post('/userProfile/candlestickGraph', async function(req,res) {
@@ -96,10 +97,10 @@ router.post('/userProfile/candlestickGraph', async function(req,res) {
     //console.log('here')
     //console.log(req.protocol + "://" + req.get('host') + req.originalUrl);
     let obj = await myMod.generateChart(req.body.CurrentStock, req.body.range);
-    let port = dbfunc.queryEqual('portfolio','username',"Dumbuser");
+    let port = dbfunc.queryEqual('portfolio','username',req.user);
 
     //chart = myMod.makeChart(obj);
-    res.render('profile.ejs',{profile: true, loggedIn: true, port: port, candleStickPrices: obj, CurrentStock: req.body.CurrentStock, IntervalChosen : IntervalChosen,IntervalDates : IntervalDates});
+    res.render('profile.ejs',{profile: true, loggedIn: checkAuthenticated(req), username: req.user, port: port, candleStickPrices: obj, CurrentStock: req.body.CurrentStock, IntervalChosen : IntervalChosen,IntervalDates : IntervalDates});
 
 })
 

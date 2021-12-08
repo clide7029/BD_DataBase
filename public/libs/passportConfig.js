@@ -22,9 +22,9 @@ function initialize(passport, getUsername, getUserByEmail) {
         }
     }
     passport.use(new LocalStrategy({usernameField: 'username'}, authenticateUser))
-    passport.serializeUser((user,done) => done(null, user[0]))
+    passport.serializeUser((user,done) => done(null, user))
     passport.deserializeUser((user,done) => {
-        return done(null, user[0])
+        return done(null, user)
     })
 }
 

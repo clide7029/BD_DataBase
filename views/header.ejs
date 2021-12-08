@@ -12,7 +12,7 @@
 <body>
 
     <div class="header">
-        <h1>Stock App</h1>
+        <h1>StockFolio</h1>
         <div class="navbar">
             <form action="/" method="GET">
                 <button type="submit" >Home</button>
@@ -20,7 +20,7 @@
             <form action="/userRoutes/userProfile" method="POST">
                 <button type="submit" >Profile</button>
             </form>
-            <% if((typeof(loggedIn) !== "undefined") && loggedIn === true){ %> 
+            <% if((typeof(loggedIn) !== "undefined") && loggedIn == true){ %> 
                 <form action="/userRoutes/logout?_method=DELETE" method="POST">
                     <button type="submit">Logout</button>
                 </form>
@@ -31,6 +31,10 @@
                 <form action="/userRoutes/userLogin" method="GET">
                     <button type="submit">Login</button>
                 </form>
+            <% } %>
+
+            <% if(typeof(username) !== 'undefined') { %>
+            <span id="username"><p><%= username %></p></span>
             <% } %>
         </div>
 

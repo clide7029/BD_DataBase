@@ -81,7 +81,7 @@ module.exports = {
     queryEqual: function(table, whereatt, wherevar) {
         //var returnList = [[]]
         var db = new sqlite3.Database('database.db');
-        let sql = 'SELECT * FROM portfolio'
+        let sql = `SELECT * FROM ${table} WHERE ${whereatt} = '${wherevar}'`
         var iterator = 0
         db.each(sql,(err,row) => {
             //console.log("in db.each");
@@ -126,7 +126,7 @@ module.exports = {
                     reject(err)
                 }
                 resolve(row)
-                console.log("row: " + row)
+                // console.log("row: " + row)
             }) 
         }).then(row => {
             userInfo = row

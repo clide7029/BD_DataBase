@@ -53,9 +53,17 @@ body {
   font-size: 17px;
 }
 
+#username p {
+  margin: 0px;
+  float: right;
+  color: black;
+  border: 1px;
+}
+
 h1 {
   font-size: 32pt;
   padding: 0px;
+  color: black;
 }
 
 .formInput {
