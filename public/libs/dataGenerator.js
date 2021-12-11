@@ -1,6 +1,6 @@
 const axios = require('axios');
 
-module.exports.stockCandles = async function (symbol, resolution='M', from=1607241875, to=1638777875) {
+async function stockCandles(symbol, resolution='M', from=1607241875, to=1638777875) {
     try {
         const data = await axios.get(`https://finnhub.io/api/v1/stock/candle?symbol=${symbol}&resolution=${resolution}&from=${from}&to=${to}`,{
             headers: {
@@ -94,9 +94,12 @@ module.exports.generateChart =  async function(CurrentStock, chosenInterval = '1
 
 
     //console.log("CurrentStock :" + CurrentStock + "past: " + pastTsSeconds + " current: " + currentTsSeconds);
-    tmp = await stockCandles(CurrentStock,resolution,pastTsSeconds,currentTsSeconds);
+    var tmp = await stockCandles(CurrentStock,resolution,pastTsSeconds,currentTsSeconds);
     //tmp = JSON.parse(FinnHubStockPrices);
     //console.log(tmp)
+    if(tmp.s == 'no_data'){
+        return 'undefined';
+    }
     for (var i = 0; i < tmp.c.length; i++) {
             //console.log('loop')
             date = new Date(tmp.t[i] * 1000);
