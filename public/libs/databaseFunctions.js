@@ -5,8 +5,6 @@ var returnList =[[]]
 var returnUsers=[[]]
 var returnStockPrices =[[]]
 module.exports = {
-
-
     lockOut: function(username){
         var db = new sqlite3.Database('database.db');
         let sql=`UPDATE User set lockedout = true WHERE username = ?`
@@ -20,52 +18,7 @@ module.exports = {
           
           });
     },
-    addPortfolio: function(username, ticker, numshares, mostrecentprice) {
-        var db = new sqlite3.Database('database.db');
-        // var stmt = db.prepare("INSERT INTO Portfolio VALUES ( ? , ? , ? , ? )");
-        // stmt.run(username, ticker, numshares, mostrecentprice);
-        // stmt.finalize();
-        db.serialize(() => {
-            db.run(`INSERT or IGNORE INTO Portfolio(username,ticker,numshares,mostrecentprice) VALUES ("${username}","${ticker}",${numshares},${mostrecentprice})`, (err, row) => {
-                //db.run(`INSERT or IGNORE INTO Portfolio(username,ticker,numshares,mostrecentprice) VALUES ("${username}","${ticker}",${numshares},${mostrecentprice}) UPDATE portfolio SET numshares = ${numshares} WHERE username = "${username}" AND ticker = "${ticker}"`, (err, row) => {
-                if(err){
-                    throw err;
-                
-                    // db.run(`UPDATE portfolio SET numshares = ${numshares} WHERE username = "${username}" AND ticker = "${ticker}"`, (err2,row2) =>{
-                    //     if(err2) {
-                    //         throw err2;
-                    //     } 
-                    //         console.log('updated instead')});
-                    //throw err;
-                }
-                //console.log(row.username);
-            });
-        });
-        db.close();
-    },
-    addOwned: function(username, ticker, numshares) {
-        var db = new sqlite3.Database('database.db');
-        // var stmt = db.prepare("INSERT INTO Portfolio VALUES ( ? , ? , ? , ? )");
-        // stmt.run(username, ticker, numshares, mostrecentprice);
-        // stmt.finalize();
-        db.serialize(() => {
-            db.run(`INSERT or IGNORE INTO Owned(username,ticker,numshares) VALUES ("${username}","${ticker}",${numshares})`, (err, row) => {
-                //db.run(`INSERT or IGNORE INTO Portfolio(username,ticker,numshares,mostrecentprice) VALUES ("${username}","${ticker}",${numshares},${mostrecentprice}) UPDATE portfolio SET numshares = ${numshares} WHERE username = "${username}" AND ticker = "${ticker}"`, (err, row) => {
-                if(err){
-                    throw err;
-                
-                    // db.run(`UPDATE portfolio SET numshares = ${numshares} WHERE username = "${username}" AND ticker = "${ticker}"`, (err2,row2) =>{
-                    //     if(err2) {
-                    //         throw err2;
-                    //     } 
-                    //         console.log('updated instead')});
-                    //throw err;
-                }
-                //console.log(row.username);
-            });
-        });
-        db.close();
-    },
+
     addUser: function(username, password, email) {
         console.log("enter add to user");
         var db = new sqlite3.Database('database.db');
@@ -114,7 +67,6 @@ module.exports = {
         });
         db.close();
     },
-
     queryEqual: function(table, whereatt, wherevar) {
         //var returnList = [[]]
         var db = new sqlite3.Database('database.db');
@@ -128,7 +80,6 @@ module.exports = {
             username = row.username
             ticker = row.ticker
             numshares = row.numshares
-            mostrecentprice = row.mostrecentprice
             
             //for (var i = 0; i < 2; i++) {
                 //var emptyStr = ""
@@ -136,7 +87,6 @@ module.exports = {
                     'username' : username,
                     'ticker' : ticker,
                     'numshares' : numshares,
-                    'mostrecentprice' : mostrecentprice
                 }
             iterator++;
         },
@@ -145,62 +95,11 @@ module.exports = {
             //console.log("in return function");
             //console.log(returnList)
             db.close();
+            returnList.splice(iterator);
             return returnList;
         }
         );
         return returnList
-    },
-    getOwnedInfo: function(username,ticker){
-        console.log("into getUserInfo");
-        //var returnList = [[]]
-        var db = new sqlite3.Database('database.db');
-        let sql = `SELECT * FROM Owned where username = (?) and ticker = (?)`
-        var iterator = 0
-        db.each(sql,[username,ticker],(err,row) => {
-            console.log("in db.each")
-            //console.log("in db.each");
-            if(err) {
-                throw err;
-            }
-            ticker = row.ticker
-            username = row.username
-            numshares = row.numshares
-
-            
-            //for (var i = 0; i < 2; i++) {
-                //var emptyStr = ""
-                returnUsers[iterator] = {
-                    'username' : username,
-                    'ticker' : ticker,
-                    'numshares' : numshares,
-                }
-            iterator++;
-        },
-        
-        function(){
-
-            db.close();
-            return returnUsers;
-        }
-        );
-        return returnUsers
-    },
-    updateOwnedAmount: function(ticker,username,amount){
-        var db = new sqlite3.Database('database.db');
-        let sql=`UPDATE Owned set numshares = ? WHERE username = ? AND ticker = ?`
-        let currentshares=this.getOwnedInfo(username,ticker)[0].numshares;
-        let newshares=currentshares+amount;
-        console.log("new currency = "+newshares)
-        let data = [newshares,username,ticker]
-
-        db.run(sql, data, function(err) {
-            if (err) {
-              return console.error(err.message);
-            }
-            console.log(`Row(s) updated: ${this.changes}`);
-            
-          
-          });
     },
     getUserInfo: async function(user) {
         //var returnList = [[]]
@@ -299,11 +198,12 @@ module.exports = {
           });
     },
     getPortfolioInfo: function(username,ticker){
-        console.log("into getUserInfo");
-        //var returnList = [[]]
+        console.log("into getPortfolioInfo");
+        //this.returnUsers = [[]]
         var db = new sqlite3.Database('database.db');
         let sql = `SELECT * FROM Portfolio where username = (?) and ticker = (?)`
         var iterator = 0
+        db.serialize(() => {
         db.each(sql,[username,ticker],(err,row) => {
             console.log("in db.each")
             //console.log("in db.each");
@@ -312,26 +212,26 @@ module.exports = {
             }
             ticker = row.ticker
             username = row.username
-            numshares = row.numshares
-            mostrecentprice = row.mostrecentprice
-            
+            numsharesSTRING = row.numshares
+            var numshares=parseFloat(numsharesSTRING)
             //for (var i = 0; i < 2; i++) {
                 //var emptyStr = ""
                 returnUsers[iterator] = {
                     'username' : username,
                     'ticker' : ticker,
                     'numshares' : numshares,
-                    'mostrecentprice': mostrecentprice
                 }
             iterator++;
         },
         
         function(){
-
+            console.log("return users 0 ="+returnUsers[0].ticker)
             db.close();
             return returnUsers;
         }
         );
+        })
+        console.log("return users 2 ="+returnUsers.length)
         return returnUsers
     },
     removePortfolio: function(ticker,username){
@@ -351,12 +251,26 @@ module.exports = {
     updatePortfolioAmount: function(ticker,username,amount){
         var db = new sqlite3.Database('database.db');
         let sql=`UPDATE portfolio set numshares = ? WHERE username = ? AND ticker = ?`
-        let currentshares=this.getPortfolioInfo(username,ticker)[0].numshares;
-        let newshares=currentshares+amount;
+        let port=this.getPortfolioInfo(username,ticker);
+        if(port[0]==undefined){
+            console.log("NO TICKER UNDEFINED")
+            return "NO TICKER"
+        }
+        if(port[0].ticker!==ticker){
+            console.log("NO TICKER")
+            return "NO TICKER"
+        }
+        let currentshares=port[0].numshares
+        let updateamount= parseFloat(amount);
+        let newshares=currentshares+updateamount;
         console.log("new currency = "+newshares)
-        if(newshares<=0){
+        if(newshares<0){
+            return "Can't go to negative shares"
+        }
+        if(newshares==0){
+            console.log("removing portfolio from update")
             this.removePortfolio(ticker,username);
-            return
+            return "removed portfolio"
         }
         let data = [newshares,username,ticker]
 
@@ -369,7 +283,43 @@ module.exports = {
           
           });
     },
-
+    addPortfolio: function(username, ticker, numshares) {
+        console.log("into add portfolio")
+        var db = new sqlite3.Database('database.db');
+        // var stmt = db.prepare("INSERT INTO Portfolio VALUES ( ? , ? , ? , ? )");
+        // stmt.run(username, ticker, numshares, mostrecentprice);
+        // stmt.finalize();
+        var temp = this.getPortfolioInfo(username,ticker)
+        console.log("temp = "+temp[0].ticker)
+        if(temp[0].ticker==ticker){
+            this.updatePortfolioAmount(ticker,username,numshares)
+            return
+        }
+        if(ticker==""||numshares==null||parseFloat(numshares)<=0){
+            console.log("invalid input numshares = "+numshares+" ticker = "+ticker)
+            return "invalid input"
+        }
+        db.serialize(() => {
+            db.run(`INSERT or IGNORE INTO Portfolio(username,ticker,numshares) VALUES ("${username}","${ticker}","${numshares}")`, (err, row) => {
+                //db.run(`INSERT or IGNORE INTO Portfolio(username,ticker,numshares,mostrecentprice) VALUES ("${username}","${ticker}",${numshares},${mostrecentprice}) UPDATE portfolio SET numshares = ${numshares} WHERE username = "${username}" AND ticker = "${ticker}"`, (err, row) => {
+                if(err){
+                    throw err;
+                
+                    // db.run(`UPDATE portfolio SET numshares = ${numshares} WHERE username = "${username}" AND ticker = "${ticker}"`, (err2,row2) =>{
+                    //     if(err2) {
+                    //         throw err2;
+                    //     } 
+                    //         console.log('updated instead')});
+                    //throw err;
+                }
+                else{
+                    console.log("added portfolio successfully")
+                }
+                //console.log(row.username);
+            });
+        });
+        db.close();
+    },
     getStocksSince: function(ticker, day) {
         //var returnList = [[]]
         var db = new sqlite3.Database('database.db');
@@ -407,5 +357,5 @@ module.exports = {
         }
         );
         return returnStockPrices
-    }
+    },
 };
