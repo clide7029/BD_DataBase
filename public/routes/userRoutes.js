@@ -73,6 +73,8 @@ router.post('/userProfile', async function(req, res) {
     if(!checkAuthenticated(req)){
         res.redirect('/');
     }
+    let olo = await dbfunc.getPortfolioInfo(req.user,req.body.CurrentStock)
+    console.log(olo[0].ticker+"   :olo")
     let shares = req.body.shares;
     if(typeof(req.body.CurrentStock) !== 'undefined') {
         console.log("adding portfolio");
@@ -83,13 +85,20 @@ router.post('/userProfile', async function(req, res) {
             if(req.body.transtype === "SELL"){
                 shares *= -1;
             }
-            dbfunc.addPortfolio(req.user, req.body.CurrentStock, shares);
+            if(olo[0].ticker==req.body.CurrentStock){
+                console.log("updating")
+                dbfunc.updatePortfolioAmount(req.body.CurrentStock,req.user,shares);
+            }
+            else{
+                console.log(olo[0].numshares)
+                console.log("adding")
+                dbfunc.addPortfolio(req.user,req.body.CurrentStock, shares);
+            }
         }
-            console.log("portfolio added");
-    }
+    }          
     console.log("getting portfolio for " + req.user);
     let port = dbfunc.queryEqual('Portfolio','username',req.user);
-
+    //console.log(port)
     res.render("profile.ejs", { port: port, loggedIn: checkAuthenticated(req), username: req.user});
 })
 
