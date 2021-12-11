@@ -1,6 +1,6 @@
 const axios = require('axios');
 
-async function stockCandles(symbol, resolution, from, to) {
+module.exports.stockCandles = async function (symbol, resolution='M', from=1607241875, to=1638777875) {
     try {
         const data = await axios.get(`https://finnhub.io/api/v1/stock/candle?symbol=${symbol}&resolution=${resolution}&from=${from}&to=${to}`,{
             headers: {

@@ -1,4 +1,4 @@
-<%- include("header.ejs", { home: "Home", nav: "Profile", loggedIn: true}) %>
+<%- include("header.ejs", { home: "Home", nav: "Profile", loggedIn: loggedIn}) %>
 
     <div class="content">
         <div class="hero">
@@ -7,18 +7,12 @@
             <span></span>
         </div>
 
-        <h1>
-            <% if(typeof(name) !== 'undefined'){ %> 
-                <%= name %>
-                <% } %>
-        </h1>
-
         <div class="buyForm">
             <form action="./userProfile" method="POST">
                 <input type="text" id="tickerID" name="CurrentStock" placeholder="enter a ticker">
                 <input type="text" id="shares" name="shares" placeholder="shares">
-                <input type="submit" id="buybtn" value="BUY">
-                <input type="submit" id="sellbtn" value="SELL">
+                <input type="submit" id="buybtn" name="transtype" value="BUY">
+                <input type="submit" id="sellbtn" name="transtype" value="SELL">
             </form>
         </div>
         
@@ -26,7 +20,6 @@
             <table id="portfolio">
                 <tr>
                     <th>Ticker</th>
-                    <th>price</th>
                     <th>shares</th>
                 </tr>
                 <% for (let i = 0; i < port.length; i++) { %>
@@ -35,9 +28,6 @@
         
                                 <td class="ticker">
                                 <%= port[i].ticker %>
-                                </td>
-                                <td class = "price">
-                                <%= port[i].mostrecentprice %>
                                 </td>
                                 <td class = "shares">
                                 <%= port[i].numshares %>
@@ -59,11 +49,4 @@
         </div>
 
     </div>
-
-<script>
-    function plotPort(i){
-        
-
-    }
-</script>
     <script src="app.js"></script>

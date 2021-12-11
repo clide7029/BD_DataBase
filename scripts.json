@@ -22,6 +22,17 @@
             "app",
             "bundle"
         ]
+    }, {
+        "title": "stop",
+        "description": "stop server",
+        "key": "stop",
+        "script": "pkill --signal SIGINT myApp",
+        "keywords": [
+        "kill",
+        "stop",
+        "restart",
+        "app"
+        ]
     }
 
 ]

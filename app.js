@@ -1,5 +1,5 @@
 // const request = require("./requestStockAPI");
-
+process.title = 'myApp';
 
 const hostname = "127.0.0.1";
 const port = 8000 //http = 80, ssh = 22
@@ -32,8 +32,8 @@ app.use(flash())
 
 var routes = require('./public/routes/r');
 
-//var builder = require('./public/libs/buildtable');
-//builder.createDatabase();
+// var builder = require('./public/libs/buildtable');
+// builder.createDatabase();
 
 
 app.set("view engine", "ejs");

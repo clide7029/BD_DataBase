@@ -73,20 +73,23 @@ router.post('/userProfile', async function(req, res) {
     if(!checkAuthenticated(req)){
         res.redirect('/');
     }
-    // let mostrecentprice = dbfunc.currentStockPrice(req.body.CurrentStock)
-    let mostrecentprice = 0;
-    console.log(`ticker = ${ req.body.CurrentStock }`);
-    console.log(`shares = ${ req.body.shares }`);
-    console.log(`price = ${ mostrecentprice }`);
+    let shares = req.body.shares;
     if(typeof(req.body.CurrentStock) !== 'undefined') {
         console.log("adding portfolio");
-        dbfunc.addPortfolio(req.user,req.body.CurrentStock, req.body.shares,mostrecentprice);
-        console.log("portfolio added");
+        const status = await myMod.stockCandles(req.body.CurrentStock);
+        console.log("status = " + status);
+        if(status === 'ok'){
+            console.log("good data");
+            if(req.body.transtype === "SELL"){
+                shares *= -1;
+            }
+            dbfunc.addPortfolio(req.user, req.body.CurrentStock, shares);
+        }
+            console.log("portfolio added");
     }
     console.log("getting portfolio for " + req.user);
     let port = dbfunc.queryEqual('Portfolio','username',req.user);
 
-    console.log(port)
     res.render("profile.ejs", { port: port, loggedIn: checkAuthenticated(req), username: req.user});
 })
 
