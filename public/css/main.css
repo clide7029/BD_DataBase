@@ -95,6 +95,8 @@ h1 {
 }
 
 .portfolio-container {
+  top: 400px;
+  margin-top: 400px;
   margin: auto;
 }
 
